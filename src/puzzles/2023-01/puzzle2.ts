@@ -13,38 +13,36 @@ const numbers = [
   'nine',
 ]
 
-function convertWordNumbers(originalString: string) {
-  let newString = originalString
-  numbers.forEach((number, index) => {
-    newString = newString.replace(new RegExp(number, 'gi'), index.toString())
-  })
-  if (newString !== originalString) {
-    console.log(`Converted ${originalString} to ${newString}`)
-  }
-  return newString
-}
-
 function reverseString(str: string): string {
   return str.split('').reverse().join('')
 }
 
+const regex = /(one|two|three|four|five|six|seven|eight|nine|\d)/gi
+const backwardsRegex = /(eno|owt|eerht|ruof|evif|xis|neves|thgie|enin|\d)/gi
+
+function convertWordToNumber(word: string): number {
+  if (word.length === 1) {
+    return parseInt(word, 10)
+  }
+  const index = numbers.indexOf(word.toLowerCase())
+  return index
+}
+
 export function answer() {
   let total = 0
-
   data.split('\n').forEach((line) => {
     if (line.trim().length > 0) {
-      const newLine = convertWordNumbers(line)
-      const first = newLine.match(/\d/)
-      const last = reverseString(newLine).match(/\d/)
-      const value = parseInt(`${first}${last}`, 10)
-      // console.log(`${newLine.padEnd(40, ' ')}  ${value}`)
+      const matches = line.match(regex) ?? ['0']
+      const firstMatch = (line.match(regex) ?? ['0'])[0]
+      const lastMatch = reverseString(
+        (reverseString(line).match(backwardsRegex) ?? ['0'])[0],
+      )
+      const firstNum = convertWordToNumber(firstMatch)
+      const lastNum = convertWordToNumber(lastMatch)
+      const value = parseInt(`${firstNum}${lastNum}`, 10)
       total += value
     }
   })
-
-  // 54331 - too low
-  // 53886
-  console.log(`The final result is ${total}`)
-
+  // 54518
   return total
 }
