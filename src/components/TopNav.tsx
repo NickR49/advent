@@ -12,8 +12,8 @@ export default function TopNav() {
         <li class={`border-b-2 ${active('/')} mx-1.5 sm:mx-6`}>
           <a href="/">Home</a>
         </li>
-        <li class={`border-b-2 ${active('/about')} mx-1.5 sm:mx-6`}>
-          <a href="/about">About</a>
+        <li class={`border-b-2 ${active('/puzzle')} mx-1.5 sm:mx-6`}>
+          <a href="/puzzle">Puzzle List</a>
         </li>
       </ul>
     </nav>

@@ -2,7 +2,11 @@ import { useParams, useSearchParams } from '@solidjs/router'
 import { createEffect, createSignal } from 'solid-js'
 import Result from './Result'
 
-const DynamicImportComponent = () => {
+interface Props {
+  puzzle: 1 | 2
+}
+
+const DynamicImportComponent = (props: Props) => {
   const params = useParams()
   const [answer, setAnswer] = createSignal<string>()
 
@@ -11,7 +15,7 @@ const DynamicImportComponent = () => {
     const day = params.day
 
     if (year && day) {
-      const modulePath = `../puzzles/${year}-${day}/puzzle1.ts`
+      const modulePath = `../puzzles/${year}-${day}/puzzle${props.puzzle}.ts`
 
       try {
         const module = await import(modulePath)
@@ -31,6 +35,7 @@ const DynamicImportComponent = () => {
 
   return (
     <div>
+      <h2>Puzzle {props.puzzle}</h2>
       <Result result={answer()} />
     </div>
   )
