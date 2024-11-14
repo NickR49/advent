@@ -1,4 +1,4 @@
-import data from './data.txt?raw'
+import data from './input.txt?raw'
 
 const numbers = [
   'xxxxxxxxxxxxx',

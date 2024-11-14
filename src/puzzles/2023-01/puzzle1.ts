@@ -1,4 +1,4 @@
-import data from './data.txt?raw'
+import data from './input.txt?raw'
 
 function reverseString(str: string): string {
   return str.split('').reverse().join('')
