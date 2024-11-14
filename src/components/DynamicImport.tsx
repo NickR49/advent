@@ -1,43 +1,43 @@
-import { useSearchParams } from "@solidjs/router";
-import { createEffect, createSignal } from "solid-js";
-import Result from "./Result";
+import { useParams, useSearchParams } from '@solidjs/router'
+import { createEffect, createSignal } from 'solid-js'
+import Result from './Result'
 
 const DynamicImportComponent = () => {
-  const [searchParams] = useSearchParams();
-  const [answer, setAnswer] = createSignal<string>();
+  const params = useParams()
+  const [answer, setAnswer] = createSignal<string>()
 
   createEffect(async () => {
-    const year = searchParams.year;
-    const puzzle = searchParams.puzzle;
+    const year = params.year
+    const day = params.day
 
-    if (year && puzzle) {
-      const modulePath = `../puzzles/${year}-${puzzle}.ts`;
+    if (year && day) {
+      const modulePath = `../puzzles/${year}-${day}.ts`
 
       try {
-        const module = await import(modulePath);
+        const module = await import(modulePath)
         // Handle the imported module (e.g., set state or call functions from the module)
         // console.log("Module loaded:", module);
-        if (module && typeof module.answer === "function") {
+        if (module && typeof module.answer === 'function') {
           // Call the 'answer' function
-          const result = module.answer();
+          const result = module.answer()
           //   console.log(`>>>>> The final result is ${result}!!!`);
-          setAnswer(result);
+          setAnswer(result)
         } else {
-          console.error("The module does not export an answer function.");
+          console.error('The module does not export an answer function.')
         }
       } catch (error) {
-        console.error("Error loading module:", error);
+        console.error('Error loading module:', error)
       }
     } else {
-      console.error("Year or puzzle query parameter is missing.");
+      console.error('Year or puzzle query parameter is missing.')
     }
-  });
+  })
 
   return (
     <div>
       <Result result={answer()} />
     </div>
-  );
-};
+  )
+}
 
-export default DynamicImportComponent;
+export default DynamicImportComponent

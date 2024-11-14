@@ -1,4 +1,4 @@
-import DynamicImportComponent from "~/components/DynamicImport";
+import DynamicImportComponent from '~/components/DynamicImport'
 
 export default function Puzzle() {
   return (
@@ -8,5 +8,5 @@ export default function Puzzle() {
       </h1>
       <DynamicImportComponent />
     </main>
-  );
+  )
 }
