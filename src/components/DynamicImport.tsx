@@ -1,4 +1,4 @@
-import { useParams, useSearchParams } from '@solidjs/router'
+import { useParams } from '@solidjs/router'
 import { createEffect, createSignal } from 'solid-js'
 import Result from './Result'
 
@@ -23,10 +23,10 @@ const DynamicImportComponent = (props: Props) => {
           const result = module.answer()
           setAnswer(result)
         } else {
-          console.error('The module does not export an answer function.')
+          // console.error('The module does not export an answer function.')
         }
       } catch (error) {
-        console.error('Error loading module:', error)
+        // console.error('Error loading module:', error)
       }
     } else {
       console.error('Year or puzzle parameter is missing.')
