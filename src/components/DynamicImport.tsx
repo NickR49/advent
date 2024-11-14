@@ -11,16 +11,12 @@ const DynamicImportComponent = () => {
     const day = params.day
 
     if (year && day) {
-      const modulePath = `../puzzles/${year}-${day}.ts`
+      const modulePath = `../puzzles/${year}-${day}/puzzle1.ts`
 
       try {
         const module = await import(modulePath)
-        // Handle the imported module (e.g., set state or call functions from the module)
-        // console.log("Module loaded:", module);
         if (module && typeof module.answer === 'function') {
-          // Call the 'answer' function
           const result = module.answer()
-          //   console.log(`>>>>> The final result is ${result}!!!`);
           setAnswer(result)
         } else {
           console.error('The module does not export an answer function.')
@@ -29,7 +25,7 @@ const DynamicImportComponent = () => {
         console.error('Error loading module:', error)
       }
     } else {
-      console.error('Year or puzzle query parameter is missing.')
+      console.error('Year or puzzle parameter is missing.')
     }
   })
 
