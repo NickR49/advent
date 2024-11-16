@@ -9,6 +9,9 @@ export default function PuzzleList() {
       <A href='/puzzle/2023/02' class='text-sky-600 hover:underline'>
         2023-02
       </A>
+      <A href='/puzzle/2023/03' class='text-sky-600 hover:underline'>
+        2023-03
+      </A>
     </div>
   )
 }
