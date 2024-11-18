@@ -1,20 +1,29 @@
 import { A } from '@solidjs/router'
 
 export default function PuzzleList() {
+  // Identify all the folder names in the src/puzzles directory
+  const modules = import.meta.glob('../../puzzles/**/*.ts', {
+    import: 'answer',
+  })
+
+  const puzzleSet = new Set<string>()
+  Object.keys(modules).forEach((module) => {
+    const timestamp = module.match(/(\d{4})-(\d{2})/)?.[0]
+    if (timestamp?.length === 7) {
+      puzzleSet.add(timestamp)
+    }
+  })
+
   return (
     <div class='flex flex-col gap-1 p-6'>
-      <A href='/puzzle/2023/01' class='text-sky-600 hover:underline'>
-        2023-01
-      </A>
-      <A href='/puzzle/2023/02' class='text-sky-600 hover:underline'>
-        2023-02
-      </A>
-      <A href='/puzzle/2023/03' class='text-sky-600 hover:underline'>
-        2023-03
-      </A>
-      <A href='/puzzle/2023/04' class='text-sky-600 hover:underline'>
-        2023-04
-      </A>
+      {[...puzzleSet].map((puzzle) => (
+        <A
+          href={`/puzzle/${puzzle.replace('-', '/')}`}
+          class='text-sky-600 hover:underline'
+        >
+          {puzzle}
+        </A>
+      ))}
     </div>
   )
 }
