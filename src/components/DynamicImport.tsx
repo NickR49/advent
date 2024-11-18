@@ -1,5 +1,7 @@
 import { useParams } from '@solidjs/router'
+import { codeToHtml } from 'shiki'
 import { createEffect, createSignal } from 'solid-js'
+import './CodeBlock.css'
 import Result from './Result'
 
 interface Props {
@@ -9,7 +11,7 @@ interface Props {
 const DynamicImportComponent = (props: Props) => {
   const params = useParams()
   const [answer, setAnswer] = createSignal<string>()
-  const [code, setCode] = createSignal<string>()
+  const [codeHtml, setCodeHtml] = createSignal<string>()
 
   createEffect(async () => {
     const year = params.year
@@ -22,7 +24,11 @@ const DynamicImportComponent = (props: Props) => {
         const module = await import(modulePath)
         if (module && typeof module.answer === 'function') {
           if (module.moduleText) {
-            setCode(module.moduleText)
+            const html = await codeToHtml(module.moduleText, {
+              lang: 'typescript',
+              theme: 'dark-plus',
+            })
+            setCodeHtml(html)
           }
           const result = module.answer()
           setAnswer(result)
@@ -41,7 +47,7 @@ const DynamicImportComponent = (props: Props) => {
     <div>
       <h2>Puzzle {props.puzzle}</h2>
       <Result result={answer()} />
-      {code() && <pre class='p-4 bg-gray-100 text-start rounded'>{code()}</pre>}
+      {codeHtml() && <div innerHTML={codeHtml()} />}
     </div>
   )
 }
