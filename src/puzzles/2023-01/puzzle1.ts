@@ -1,4 +1,6 @@
 import data from './input.txt?raw'
+import moduleText from './puzzle1.ts?raw'
+export { moduleText }
 
 function reverseString(str: string): string {
   return str.split('').reverse().join('')

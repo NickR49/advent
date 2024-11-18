@@ -9,6 +9,7 @@ interface Props {
 const DynamicImportComponent = (props: Props) => {
   const params = useParams()
   const [answer, setAnswer] = createSignal<string>()
+  const [code, setCode] = createSignal<string>()
 
   createEffect(async () => {
     const year = params.year
@@ -20,6 +21,9 @@ const DynamicImportComponent = (props: Props) => {
       try {
         const module = await import(modulePath)
         if (module && typeof module.answer === 'function') {
+          if (module.moduleText) {
+            setCode(module.moduleText)
+          }
           const result = module.answer()
           setAnswer(result)
         } else {
@@ -37,6 +41,7 @@ const DynamicImportComponent = (props: Props) => {
     <div>
       <h2>Puzzle {props.puzzle}</h2>
       <Result result={answer()} />
+      {code() && <pre class='p-4 bg-gray-100 text-start rounded'>{code()}</pre>}
     </div>
   )
 }
