@@ -1,8 +1,8 @@
+import moduleText from './puzzle2.ts?raw'
 import data from './sample.txt?raw'
+export { moduleText }
 
 export function answer() {
-  console.log(`${data.split('\n').length} lines to process`)
-
   // Extract the two lists
   const list1 = data
     .split('\n')

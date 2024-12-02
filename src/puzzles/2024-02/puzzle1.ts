@@ -1,5 +1,7 @@
 import { isEqual } from 'lodash'
 import data from './input.txt?raw'
+import moduleText from './puzzle1.ts?raw'
+export { moduleText }
 
 function extractReportLevels(report: string): number[] {
   return report.split(' ').map((level) => parseInt(level, 10))

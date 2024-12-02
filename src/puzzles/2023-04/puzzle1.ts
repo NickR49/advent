@@ -1,4 +1,6 @@
 import data from './input.txt?raw'
+import moduleText from './puzzle1.ts?raw'
+export { moduleText }
 
 function getCardPoints(card: string): number {
   let matchingCards = 0
