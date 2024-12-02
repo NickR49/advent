@@ -3,6 +3,10 @@ import data from './input.txt?raw'
 import moduleText from './puzzle2.ts?raw'
 export { moduleText }
 
+function extractReports(data: string): string[] {
+  return data.split('\n')
+}
+
 function extractReportLevels(report: string): number[] {
   return report.split(' ').map((level) => parseInt(level, 10))
 }
@@ -13,34 +17,36 @@ function areLevelsSorted(levels: number[]): boolean {
   return isEqual(levels, ascSortedLevels) || isEqual(levels, descSortedLevels)
 }
 
-function areSafeLevelDiffs(levels: number[]): boolean {
-  // Check the levels increment by at least one and at most three
-  let prevValue = 0
-  let safe = true
-  levels.forEach((value, index) => {
-    if (index === 0) {
-      prevValue = value
-    } else {
-      const diff = Math.abs(value - prevValue)
-      if (diff < 1 || diff > 3) {
-        safe = false
-      }
-      prevValue = value
+// Check the variance between levels increment is between 1 and 3
+function isSafeVariance(value: number, prevValue: number): boolean {
+  const diff = Math.abs(value - prevValue)
+  return diff >= 1 && diff <= 3
+}
+
+function areSafeLevelVariances(levels: number[]): boolean {
+  let prevLevel = levels[0]
+  for (const level of levels.slice(1)) {
+    if (!isSafeVariance(level, prevLevel)) {
+      return false
     }
-  })
-  return safe
+    prevLevel = level
+  }
+  return true
 }
 
 function isSafeReport(report: string): boolean {
   const levels = extractReportLevels(report)
-  if (areLevelsSorted(levels) && areSafeLevelDiffs(levels)) {
+  if (areLevelsSorted(levels) && areSafeLevelVariances(levels)) {
     return true
   }
   // Recheck each report each time for where one level is removed
   for (let i = 0; i < levels.length; i++) {
     // Exclude item at index i of array
     const splicedLevels = levels.toSpliced(i, 1)
-    if (areLevelsSorted(splicedLevels) && areSafeLevelDiffs(splicedLevels)) {
+    if (
+      areLevelsSorted(splicedLevels) &&
+      areSafeLevelVariances(splicedLevels)
+    ) {
       return true
     }
   }
@@ -48,14 +54,11 @@ function isSafeReport(report: string): boolean {
 }
 
 export function answer() {
-  let total = 0
-
-  data.split('\n').forEach((report) => {
-    if (isSafeReport(report)) {
-      total++
-    }
-  })
+  const reports = extractReports(data)
+  const safeReportCount = reports.filter((report) =>
+    isSafeReport(report),
+  ).length
 
   // 528
-  return total
+  return safeReportCount
 }
