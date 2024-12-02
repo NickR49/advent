@@ -1,7 +1,7 @@
 import { useParams } from '@solidjs/router'
 import { codeToHtml } from 'shiki'
 import { createEffect, createSignal } from 'solid-js'
-import './CodeBlock.css'
+import CodeBlock from './CodeBlock'
 import Result from './Result'
 
 interface Props {
@@ -44,10 +44,10 @@ const DynamicImportComponent = (props: Props) => {
   })
 
   return (
-    <div>
+    <div class='flex flex-col gap-2 items-center'>
       <h2>Puzzle {props.puzzle}</h2>
       <Result result={answer()} />
-      {codeHtml() && <div innerHTML={codeHtml()} />}
+      {codeHtml() && <CodeBlock code={codeHtml()} />}
     </div>
   )
 }
