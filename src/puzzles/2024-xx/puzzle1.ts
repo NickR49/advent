@@ -5,7 +5,11 @@ export { moduleText }
 export function answer() {
   let total = 0
 
-  console.log(`${data.split('\n').length} lines to process`)
+  try {
+    console.log(`${data.split('\n').length} lines to process`)
+  } catch (e) {
+    console.log(`Error: ${e}`)
+  }
 
   //
   return total

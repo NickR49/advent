@@ -6,7 +6,7 @@ export function answer() {
   let total = 0
 
   try {
-    console.log(`${data.split('\n').length} lines to process`)
+    // console.log(`${data.split('\n').length} lines to process`)
   } catch (e) {
     console.log(`Error: ${e}`)
   }
