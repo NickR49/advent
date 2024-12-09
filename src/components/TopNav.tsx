@@ -15,6 +15,12 @@ export default function TopNav() {
         <li class={`border-b-2 ${active('/puzzle')} mx-1.5 sm:mx-6`}>
           <a href='/puzzle'>Puzzle List</a>
         </li>
+        <li class={`border-b-2 ${active('/puzzle/2023')} mx-1.5 sm:mx-6`}>
+          <a href='/puzzle/2023'>2023</a>
+        </li>
+        <li class={`border-b-2 ${active('/puzzle/2024')} mx-1.5 sm:mx-6`}>
+          <a href='/puzzle/2024'>2024</a>
+        </li>
       </ul>
     </nav>
   )
