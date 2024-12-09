@@ -1,12 +1,19 @@
-import { Coord } from '~/utils/gridUtils'
+import { cloneDeep } from 'lodash'
+import {
+  Coord,
+  getGrid,
+  getGridCell,
+  isEqualCoord,
+  isInGrid,
+  printGrid,
+  setGridCell,
+} from '~/utils/gridUtils'
 import data from './input.txt?raw'
 import moduleText from './puzzle1.ts?raw'
 export { moduleText }
 
-const map = data.split('\n')
-const mapCopy = data.split('\n')
-const height = map.length
-const width = map[0].length
+const grid = getGrid(data)
+const gridCopy = cloneDeep(grid)
 
 const nodeChars =
   'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
@@ -25,9 +32,9 @@ function getNodeCounts(): { [char: string]: number } {
 
 function findNodes(char: string, count: number): Coord[] {
   const coords: Coord[] = []
-  for (let y = 0; y < height; y++) {
-    for (let x = 0; x < width; x++) {
-      if (map[y].slice(x, x + 1) === char) {
+  for (let y = 0; y < grid.height; y++) {
+    for (let x = 0; x < grid.width; x++) {
+      if (getGridCell(grid, [x, y]) === char) {
         coords.push([x, y])
       }
       if (coords.length === count) {
@@ -36,24 +43,6 @@ function findNodes(char: string, count: number): Coord[] {
     }
   }
   return coords
-}
-
-function printCoord([x, y]: Coord) {
-  return `[${x}, ${y}]`
-}
-
-function printMap() {
-  console.log('----------------------')
-  mapCopy.forEach((line) => console.log(line))
-}
-
-function isInMap([x, y]: Coord) {
-  return x >= 0 && x < width && y >= 0 && y < height
-}
-
-function setChar([x, y]: Coord, char: string) {
-  const line = mapCopy[y]
-  mapCopy[y] = line.substring(0, x) + char + line.substring(x + 1)
 }
 
 function calcAntinode(
@@ -67,15 +56,9 @@ function calcAntinode(
 
 const uniqueLocations: Coord[] = []
 
-function isCoordEqual(coord1: Coord, coord2: Coord) {
-  const [x1, y1] = coord1
-  const [x2, y2] = coord2
-  return x1 === x2 && y1 === y2
-}
-
 function addUniqueLocation(coord: Coord) {
   for (let i = 0; i < uniqueLocations.length; i++) {
-    if (isCoordEqual(coord, uniqueLocations[i])) {
+    if (isEqualCoord(coord, uniqueLocations[i])) {
       return
     }
   }
@@ -84,8 +67,8 @@ function addUniqueLocation(coord: Coord) {
 
 function calcAndAdd(coord1: Coord, coord2: Coord) {
   const antinode1 = calcAntinode(coord1, coord2)
-  if (isInMap(antinode1)) {
-    setChar(antinode1, '#')
+  if (isInGrid(grid, antinode1)) {
+    setGridCell(gridCopy, antinode1, '#') // For debug purposes
     addUniqueLocation(antinode1)
   }
 }
@@ -99,14 +82,14 @@ function findAntinodes(coords: Coord[]) {
     }
   }
 
-  // printMap()
+  // printGrid(gridCopy)
 }
 
 export function answer() {
   let total = 0
 
   try {
-    // printMap()
+    // printGrid(gridCopy)
 
     // Take note of how many nodes there are for each letter/number
     const nodeCounts = getNodeCounts()
@@ -117,7 +100,7 @@ export function answer() {
     })
     total = uniqueLocations.length
 
-    // printMap()
+    // printGrid(gridCopy)
   } catch (e) {
     console.log(`Error: ${e}`)
   }

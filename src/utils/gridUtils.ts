@@ -48,3 +48,7 @@ export function printGrid(grid: Grid): void {
 export function isInGrid(grid: Grid, [x, y]: Coord): boolean {
   return x >= 0 && x < grid.width && y >= 0 && y < grid.height
 }
+
+export function isEqualCoord([x1, y1]: Coord, [x2, y2]: Coord): boolean {
+  return x1 === x2 && y1 === y2
+}
