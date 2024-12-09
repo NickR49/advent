@@ -59,6 +59,7 @@ export function answer() {
     isSafeReport(report),
   ).length
 
-  // 528
   return safeReportCount
 }
+
+export const confirmedAnswer = 528

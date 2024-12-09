@@ -87,6 +87,7 @@ export function answer() {
     console.log(`Error: ${e}`)
   }
 
-  // 5177
   return total
 }
+
+export const confirmedAnswer = 5177

@@ -59,6 +59,7 @@ export function answer() {
     console.log(`Error: ${e}`)
   }
 
-  // 271691107779347
   return total
 }
+
+export const confirmedAnswer = 271691107779347

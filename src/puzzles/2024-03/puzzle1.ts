@@ -14,6 +14,7 @@ export function answer() {
     total += parseInt(match[1]) * parseInt(match[2])
   }
 
-  // 168539636
   return total
 }
+
+export const confirmedAnswer = 168539636

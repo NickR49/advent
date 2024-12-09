@@ -20,6 +20,7 @@ export function answer() {
     total += Math.abs(list1[i] - list2[i])
   }
 
-  // 1151792
   return total
 }
+
+export const confirmedAnswer = 1151792

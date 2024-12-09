@@ -20,6 +20,7 @@ export function answer() {
     }
   }
 
-  // 97529391
   return total
 }
+
+export const confirmedAnswer = 97529391

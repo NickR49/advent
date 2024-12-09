@@ -186,6 +186,7 @@ export function answer() {
   console.log(`Assumed loop count: ${assumedLoopCount}`)
   console.log(`Exited grid count: ${exitedGrid}`)
 
-  // 1686
   return total
 }
+
+export const confirmedAnswer = 1686

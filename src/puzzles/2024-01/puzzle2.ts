@@ -1,5 +1,5 @@
+import data from './input.txt?raw'
 import moduleText from './puzzle2.ts?raw'
-import data from './sample.txt?raw'
 export { moduleText }
 
 export function answer() {
@@ -21,6 +21,7 @@ export function answer() {
     total += item * count
   })
 
-  // 21790168
   return total
 }
+
+export const confirmedAnswer = 21790168

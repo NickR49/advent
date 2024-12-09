@@ -10,7 +10,8 @@ interface Props {
 
 const DynamicImportComponent = (props: Props) => {
   const params = useParams()
-  const [answer, setAnswer] = createSignal<string>()
+  const [answer, setAnswer] = createSignal<number>()
+  const [confirmedAnswer, setConfirmedAnswer] = createSignal<number>()
   const [codeHtml, setCodeHtml] = createSignal<string>()
 
   createEffect(async () => {
@@ -30,8 +31,10 @@ const DynamicImportComponent = (props: Props) => {
             })
             setCodeHtml(html)
           }
-          const result = module.answer()
-          setAnswer(result)
+          const answer = module.answer()
+          setAnswer(answer)
+          const confirmedAnswer = module.confirmedAnswer
+          setConfirmedAnswer(confirmedAnswer)
         } else {
           // console.error('The module does not export an answer function.')
         }
@@ -46,7 +49,7 @@ const DynamicImportComponent = (props: Props) => {
   return (
     <div class='flex flex-col gap-2 items-center'>
       <h2>Puzzle {props.puzzle}</h2>
-      <Result result={answer()} />
+      <Result result={answer()} confirmedResult={confirmedAnswer()} />
       {codeHtml() && <CodeBlock code={codeHtml()} />}
     </div>
   )
