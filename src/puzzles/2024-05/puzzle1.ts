@@ -1,4 +1,5 @@
 import { isEqual } from 'lodash'
+import { getLines } from '~/utils/lineUtils'
 import data from './input.txt?raw'
 import moduleText from './puzzle1.ts?raw'
 export { moduleText }
@@ -14,7 +15,7 @@ export function answer() {
   let total = 0
 
   try {
-    const lines = data.split('\n')
+    const lines = getLines(data)
     const pageOrderingRules: PageOrderingRule[] = []
     const pageUpdates: Update[] = []
 

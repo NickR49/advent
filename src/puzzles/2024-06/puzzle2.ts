@@ -1,16 +1,18 @@
 import { cloneDeep } from 'lodash'
+import {
+  Coord,
+  Direction,
+  getGrid,
+  getGridCell,
+  setGridCell,
+} from '~/utils/gridUtils'
 import data from './input.txt?raw'
 import moduleText from './puzzle2.ts?raw'
 export { moduleText }
 
 const originalData = data
 
-let map = originalData.split('\n')
-const width = map[0].length
-const height = map.length
-
-type Direction = [x: number, y: number]
-type Coord = [x: number, y: number]
+let grid = getGrid(data)
 
 let directionIndex = 0
 const directions: Direction[] = [
@@ -20,19 +22,10 @@ const directions: Direction[] = [
   [-1, 0],
 ]
 
-function getChar([x, y]: Coord) {
-  return map[y].slice(x, x + 1)
-}
-
-function setChar([x, y]: Coord, char: string) {
-  const line = map[y]
-  map[y] = line.substring(0, x) + char + line.substring(x + 1)
-}
-
 function findGuardLocation(): Coord | undefined {
-  for (let y = 0; y < height; y++) {
-    for (let x = 0; x < width; x++) {
-      if (getChar([x, y]) === '^') {
+  for (let y = 0; y < grid.height; y++) {
+    for (let x = 0; x < grid.width; x++) {
+      if (getGridCell(grid, [x, y]) === '^') {
         return [x, y]
       }
     }
@@ -40,7 +33,7 @@ function findGuardLocation(): Coord | undefined {
 }
 
 function findNextObstacleLocation(currLoc: Coord): Coord {
-  if (currLoc[0] < width) {
+  if (currLoc[0] < grid.width) {
     return [currLoc[0] + 1, currLoc[1]]
   }
   console.log(`Obstacle now in line ${currLoc[1] + 1}`)
@@ -51,23 +44,16 @@ function findNextFreeObstacleLocation(currLoc: Coord): Coord {
   let checkLoc = currLoc
   while (true) {
     checkLoc = findNextObstacleLocation(checkLoc)
-    if (checkLoc[1] >= height) {
+    if (checkLoc[1] >= grid.height) {
       console.log(`We have exited the matrix`)
       return [-1, -1]
     }
-    if (['.', 'X'].includes(getChar(checkLoc))) {
+    // if (['.', 'X'].includes(getChar(checkLoc))) {
+    const cell = getGridCell(grid, checkLoc)
+    if (['.', 'X'].includes(cell ?? '')) {
       return checkLoc
     }
   }
-}
-
-function printCoord([x, y]: Coord) {
-  return `[${x}, ${y}]`
-}
-
-function printMap() {
-  console.log('----------------------')
-  map.forEach((line) => console.log(line))
 }
 
 function moveGuard(
@@ -79,10 +65,16 @@ function moveGuard(
   const futureCoord: Coord = [guardX + direction[0], guardY + direction[1]]
   const [futureX, futureY] = futureCoord
 
-  if (futureX < 0 || futureX >= width || futureY < 0 || futureY >= height) {
+  if (
+    futureX < 0 ||
+    futureX >= grid.width ||
+    futureY < 0 ||
+    futureY >= grid.height
+  ) {
     return [undefined, direction]
   }
-  if (!['.', 'X'].includes(getChar([futureX, futureY]))) {
+  const cell = getGridCell(grid, futureCoord)
+  if (!['.', 'X'].includes(cell ?? '')) {
     // Obstacle so change direction
     directionIndex = (directionIndex + 1) % 4
     const newDirection = directions[directionIndex]
@@ -132,8 +124,8 @@ export function answer() {
         break
       }
       obstCounter++
-      map = originalData.split('\n')
-      setChar(obstLoc, 'O')
+      grid = getGrid(originalData)
+      setGridCell(grid, obstLoc, 'O')
 
       let snapshotGuardLoc = cloneDeep(origGuardLoc)
       let snapshotGuardDir = cloneDeep(origGuardDir)
@@ -145,7 +137,7 @@ export function answer() {
         let iterations = 0
         directionIndex = 0
         while (true) {
-          setChar(guardLoc, 'X') // Don't need this - just useful for debugging
+          setGridCell(grid, guardLoc, 'X') // Don't need this - just useful for debugging
           const [newGuardLoc, newGuardDir] = moveGuard(guardLoc, guardDir)
           if (newGuardLoc === undefined) {
             // Have exited the grid

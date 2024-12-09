@@ -1,13 +1,15 @@
+import {
+  Coord,
+  Direction,
+  getGrid,
+  getGridCell,
+  setGridCell,
+} from '~/utils/gridUtils'
 import data from './input.txt?raw'
 import moduleText from './puzzle1.ts?raw'
 export { moduleText }
 
-const map = data.split('\n')
-const width = map[0].length
-const height = map.length
-
-type Direction = [x: number, y: number]
-type Coord = [x: number, y: number]
+const grid = getGrid(data)
 
 let directionIndex = 0
 const directions: Direction[] = [
@@ -17,19 +19,10 @@ const directions: Direction[] = [
   [-1, 0],
 ]
 
-function getChar([x, y]: Coord) {
-  return map[y].slice(x, x + 1)
-}
-
-function setChar([x, y]: Coord) {
-  const line = map[y]
-  map[y] = line.substring(0, x) + 'X' + line.substring(x + 1)
-}
-
 function findGuardLocation(): Coord | undefined {
-  for (let y = 0; y < height; y++) {
-    for (let x = 0; x < width; x++) {
-      if (getChar([x, y]) === '^') {
+  for (let y = 0; y < grid.height; y++) {
+    for (let x = 0; x < grid.width; x++) {
+      if (getGridCell(grid, [x, y]) === '^') {
         return [x, y]
       }
     }
@@ -43,10 +36,16 @@ function moveGuard(
   const [guardX, guardY] = guardLoc
   // Check if there is an obstacle
   const [futureX, futureY] = [guardX + direction[0], guardY + direction[1]]
-  if (futureX < 0 || futureX >= width || futureY < 0 || futureY >= height) {
+  if (
+    futureX < 0 ||
+    futureX >= grid.width ||
+    futureY < 0 ||
+    futureY >= grid.height
+  ) {
     return [undefined, direction]
   }
-  if (!['.', 'X'].includes(getChar([futureX, futureY]))) {
+  const cell = getGridCell(grid, [futureX, futureY])
+  if (!['.', 'X'].includes(cell ?? '')) {
     // Obstacle so change direction
     directionIndex = (directionIndex + 1) % 4
     const newDirection = directions[directionIndex]
@@ -66,7 +65,7 @@ export function answer() {
       let currDir: Direction = [0, -1]
       // Iterate through guard moves until they leave the map
       while (true) {
-        setChar(guardLoc)
+        setGridCell(grid, guardLoc, 'X')
         const [newGuardLoc, newDir] = moveGuard(guardLoc, currDir)
         if (newGuardLoc === undefined) {
           break
@@ -75,13 +74,14 @@ export function answer() {
         currDir = newDir
       }
       // Count guard locations
-      for (let y = 0; y < height; y++) {
-        for (let x = 0; x < width; x++) {
-          if (getChar([x, y]) === 'X') {
+      for (let y = 0; y < grid.height; y++) {
+        for (let x = 0; x < grid.width; x++) {
+          if (getGridCell(grid, [x, y]) === 'X') {
             total += 1
           }
         }
       }
+      // printGrid(grid)
     }
   } catch (e) {
     console.log(`Error: ${e}`)

@@ -1,10 +1,11 @@
 import { isEqual } from 'lodash'
+import { getLines } from '~/utils/lineUtils'
 import data from './input.txt?raw'
 import moduleText from './puzzle2.ts?raw'
 export { moduleText }
 
 function extractReports(data: string): string[] {
-  return data.split('\n')
+  return getLines(data)
 }
 
 function extractReportLevels(report: string): number[] {

@@ -1,3 +1,4 @@
+import { Coord } from '~/utils/gridUtils'
 import data from './input.txt?raw'
 import moduleText from './puzzle2.ts?raw'
 export { moduleText }
@@ -9,8 +10,6 @@ const width = map[0].length
 
 const nodeChars =
   'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
-
-type Coord = [x: number, y: number]
 
 // Take note of how many nodes there are for each letter/number
 function getNodeCounts(): { [char: string]: number } {

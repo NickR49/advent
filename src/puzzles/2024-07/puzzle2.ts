@@ -1,3 +1,4 @@
+import { getLines } from '~/utils/lineUtils'
 import data from './input.txt?raw'
 import moduleText from './puzzle2.ts?raw'
 export { moduleText }
@@ -42,7 +43,7 @@ export function answer() {
   let total = 0
 
   try {
-    const lines = data.split('\n')
+    const lines = getLines(data)
     lines.forEach((line) => {
       const lineTotal = parseInt(line.split(':')[0])
       const lineValues = line

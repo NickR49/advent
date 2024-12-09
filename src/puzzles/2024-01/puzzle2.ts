@@ -1,16 +1,15 @@
+import { getLines } from '~/utils/lineUtils'
 import data from './input.txt?raw'
 import moduleText from './puzzle2.ts?raw'
 export { moduleText }
 
 export function answer() {
   // Extract the two lists
-  const list1 = data
-    .split('\n')
-    .map((line) => parseInt(line.split('   ')[0]))
+  const list1 = getLines(data)
+    .map((line) => parseInt(line.split(/\s+/)[0]))
     .sort((a, b) => a - b)
-  const list2 = data
-    .split('\n')
-    .map((line) => parseInt(line.split('   ')[1]))
+  const list2 = getLines(data)
+    .map((line) => parseInt(line.split(/\s+/)[1]))
     .sort((a, b) => a - b)
 
   let total = 0

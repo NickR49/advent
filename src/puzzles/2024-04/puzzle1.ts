@@ -1,21 +1,11 @@
+import { Coord, Direction, getGrid, getGridCell } from '~/utils/gridUtils'
 import data from './input.txt?raw'
 import moduleText from './puzzle1.ts?raw'
 export { moduleText }
 
-type Direction = [x: number, y: number]
-type Coord = [x: number, y: number]
+const grid = getGrid(data)
 
-const lines = data.split('\n')
-const width = lines[0].length
-const height = lines.length
 const word = 'XMAS'
-
-function getChar([x, y]: Coord): string | undefined {
-  if (x < 0 || x >= width || y < 0 || y >= height) {
-    return undefined
-  }
-  return lines[y].slice(x, x + 1)
-}
 
 const directions: Direction[] = [
   [0, -1],
@@ -34,7 +24,7 @@ function checkWord([x, y]: Coord): number {
     let charMatches = 1
     for (let i = 1; i < word.length; i++) {
       const coordToCheck: Coord = [x + d[0] * i, y + d[1] * i]
-      if (getChar(coordToCheck) === word.slice(i, i + 1)) {
+      if (getGridCell(grid, coordToCheck) === word.slice(i, i + 1)) {
         charMatches++
       }
     }
@@ -48,9 +38,9 @@ function checkWord([x, y]: Coord): number {
 export function answer() {
   let total = 0
   try {
-    for (let y = 0; y <= height; y++) {
-      for (let x = 0; x <= width; x++) {
-        if (getChar([x, y]) === word.slice(0, 1)) {
+    for (let y = 0; y <= grid.height; y++) {
+      for (let x = 0; x <= grid.width; x++) {
+        if (getGridCell(grid, [x, y]) === word.slice(0, 1)) {
           const matches = checkWord([x, y])
           total += matches
         }
