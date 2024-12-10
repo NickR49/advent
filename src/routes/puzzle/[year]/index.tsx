@@ -10,7 +10,7 @@ export default function PuzzleList() {
 
   const puzzleSet = new Set<string>()
   Object.keys(modules).forEach((module) => {
-    const timestamp = module.match(/(\d{4})-(\d{2})/)?.[0]
+    const timestamp = module.match(/(\d{4})\/(\d{2})/)?.[0]
     if (timestamp?.length === 7) {
       puzzleSet.add(timestamp)
     }

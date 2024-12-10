@@ -19,7 +19,7 @@ const DynamicImportComponent = (props: Props) => {
     const day = params.day
 
     if (year && day) {
-      const modulePath = `../puzzles/${year}-${day}/puzzle${props.puzzle}.ts`
+      const modulePath = `../puzzles/${year}/${day}/puzzle${props.puzzle}.ts`
 
       try {
         const module = await import(modulePath)
