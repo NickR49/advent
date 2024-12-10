@@ -1,25 +1,25 @@
 import { useParams } from '@solidjs/router'
 import { codeToHtml } from 'shiki'
 import { createEffect, createSignal } from 'solid-js'
+import { Grid } from '~/utils/gridUtils'
 import CodeBlock from './CodeBlock'
 import Result from './Result'
 
-interface Props {
-  puzzle: 1 | 2
-}
-
-const DynamicImportComponent = (props: Props) => {
+const DynamicImportComponent = () => {
   const params = useParams()
+
   const [answer, setAnswer] = createSignal<number>()
   const [confirmedAnswer, setConfirmedAnswer] = createSignal<number>()
   const [codeHtml, setCodeHtml] = createSignal<string>()
+  const [grid, setGrid] = createSignal<Grid>()
+  const puzzle = () => (params.day.slice(2, 3) === 'b' ? 2 : 1)
 
   createEffect(async () => {
     const year = params.year
-    const day = params.day
+    const day = params.day.slice(0, 2)
 
-    if (year && day) {
-      const modulePath = `../puzzles/${year}/${day}/puzzle${props.puzzle}.ts`
+    if (year && day && puzzle) {
+      const modulePath = `../puzzles/${year}/${day}/puzzle${puzzle()}.ts`
 
       try {
         const module = await import(modulePath)
@@ -35,6 +35,8 @@ const DynamicImportComponent = (props: Props) => {
           setAnswer(answer)
           const confirmedAnswer = module.confirmedAnswer
           setConfirmedAnswer(confirmedAnswer)
+          const grid = module.grid
+          setGrid(grid)
         } else {
           // console.error('The module does not export an answer function.')
         }
@@ -48,9 +50,9 @@ const DynamicImportComponent = (props: Props) => {
 
   return (
     <div class='flex flex-col gap-2 items-center'>
-      <h2>Puzzle {props.puzzle}</h2>
       <Result result={answer()} confirmedResult={confirmedAnswer()} />
       {codeHtml() && <CodeBlock code={codeHtml()} />}
+      {grid() && <span>Grid width: {grid()?.width}</span>}
     </div>
   )
 }
