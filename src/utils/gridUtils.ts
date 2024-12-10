@@ -52,3 +52,29 @@ export function isInGrid(grid: Grid, [x, y]: Coord): boolean {
 export function isEqualCoord([x1, y1]: Coord, [x2, y2]: Coord): boolean {
   return x1 === x2 && y1 === y2
 }
+
+export function containsCoord(coords: Coord[], coord: Coord): boolean {
+  return coords.some((c) => isEqualCoord(c, coord))
+}
+
+export function uniqueCoords(coords: Coord[]): Coord[] {
+  const uniqueCoords: Coord[] = []
+  for (let i = 0; i < coords.length; i++) {
+    if (!containsCoord(uniqueCoords, coords[i])) {
+      uniqueCoords.push(coords[i])
+    }
+  }
+  return uniqueCoords
+}
+
+export function findCellMatches(grid: Grid, char: string): Coord[] {
+  const matches: Coord[] = []
+  for (let y = 0; y < grid.height; y++) {
+    for (let x = 0; x < grid.width; x++) {
+      if (getGridCell(grid, [x, y]) === char) {
+        matches.push([x, y])
+      }
+    }
+  }
+  return matches
+}

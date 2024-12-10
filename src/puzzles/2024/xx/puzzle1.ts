@@ -1,5 +1,6 @@
 import { getGrid, printGrid } from '~/utils/gridUtils'
 import { getLines, printLines } from '~/utils/lineUtils'
+import { log } from '~/utils/log'
 import moduleText from './puzzle1.ts?raw'
 import data from './sample.txt?raw'
 export { moduleText }
@@ -14,10 +15,11 @@ export function answer() {
     printLines(lines)
     printGrid(grid)
   } catch (e) {
-    console.log(`Error: ${e}`)
+    log(`Error: ${e}`)
   }
 
   return total
 }
 
 // export const confirmedAnswer =
+// export { grid }
