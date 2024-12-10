@@ -41,3 +41,4 @@ export function answer() {
 }
 
 export const confirmedAnswer = 1864
+export { grid }

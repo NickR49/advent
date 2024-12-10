@@ -1,8 +1,9 @@
 import { useParams } from '@solidjs/router'
 import { codeToHtml } from 'shiki'
-import { createEffect, createSignal } from 'solid-js'
+import { createEffect, createSignal, Show } from 'solid-js'
 import { Grid } from '~/utils/gridUtils'
 import CodeBlock from './CodeBlock'
+import DisplayGrid from './DisplayGrid'
 import Result from './Result'
 
 const DynamicImportComponent = () => {
@@ -51,8 +52,10 @@ const DynamicImportComponent = () => {
   return (
     <div class='flex flex-col gap-2 items-center'>
       <Result result={answer()} confirmedResult={confirmedAnswer()} />
-      {codeHtml() && <CodeBlock code={codeHtml()} />}
-      {grid() && <span>Grid width: {grid()?.width}</span>}
+      {/* {codeHtml() && <CodeBlock code={codeHtml()} />} */}
+      <Show when={grid()}>
+        <DisplayGrid grid={grid()!} />
+      </Show>
     </div>
   )
 }
