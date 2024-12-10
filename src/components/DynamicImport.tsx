@@ -3,7 +3,7 @@ import { codeToHtml } from 'shiki'
 import { createEffect, createSignal, Show } from 'solid-js'
 import { Grid } from '~/utils/gridUtils'
 import CodeBlock from './CodeBlock'
-import DisplayGrid from './DisplayGrid'
+import FlexboxGrid from './FlexboxGrid'
 import Result from './Result'
 
 const DynamicImportComponent = () => {
@@ -54,7 +54,7 @@ const DynamicImportComponent = () => {
       <Result result={answer()} confirmedResult={confirmedAnswer()} />
       {/* {codeHtml() && <CodeBlock code={codeHtml()} />} */}
       <Show when={grid()}>
-        <DisplayGrid grid={grid()!} />
+        <FlexboxGrid grid={grid()!} />
       </Show>
     </div>
   )

@@ -48,7 +48,6 @@ function findNextFreeObstacleLocation(currLoc: Coord): Coord {
       console.log(`We have exited the matrix`)
       return [-1, -1]
     }
-    // if (['.', 'X'].includes(getChar(checkLoc))) {
     const cell = getGridCell(grid, checkLoc)
     if (['.', 'X'].includes(cell ?? '')) {
       return checkLoc
@@ -182,3 +181,4 @@ export function answer() {
 }
 
 export const confirmedAnswer = 1686
+export { grid }

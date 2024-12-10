@@ -8,6 +8,7 @@ import {
   printGrid,
   setGridCell,
 } from '~/utils/gridUtils'
+import { log } from '~/utils/log'
 import data from './input.txt?raw'
 import moduleText from './puzzle1.ts?raw'
 export { moduleText }
@@ -102,10 +103,11 @@ export function answer() {
 
     // printGrid(gridCopy)
   } catch (e) {
-    console.log(`Error: ${e}`)
+    log(`Error: ${e}`)
   }
 
   return total
 }
 
 export const confirmedAnswer = 390
+export { grid }

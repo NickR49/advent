@@ -75,9 +75,7 @@ export function answer() {
   const allLines: string[] = data.split('\n')
   numbers
     .filter((num) => hasAdjacentSymbol(allLines, num))
-    .forEach((num) => {
-      total += num.value
-    })
+    .forEach((num) => (total += num.value))
 
   // 560670
   return total

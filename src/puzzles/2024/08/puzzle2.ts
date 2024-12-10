@@ -112,3 +112,4 @@ export function answer() {
 }
 
 export const confirmedAnswer = 1246
+export { gridCopy as grid }
