@@ -4,14 +4,20 @@ export interface Grid {
   width: number
   height: number
   cells: string[][]
+  marked?: boolean[][]
 }
 
 export function getGrid(text: string): Grid {
   const data = getLines(text).map((line) => line.split(''))
+  const width = data[0].length
+  const height = data.length
   return {
-    width: data[0].length,
-    height: data.length,
+    width,
+    height,
     cells: data,
+    marked: Array(height)
+      .fill(false)
+      .map(() => Array(width).fill(false)),
   }
 }
 
@@ -49,6 +55,16 @@ export function isInGrid(grid: Grid, [x, y]: Coord): boolean {
   return x >= 0 && x < grid.width && y >= 0 && y < grid.height
 }
 
+export function isMarked(grid: Grid, [x, y]: Coord): boolean {
+  return isInGrid(grid, [x, y]) && (grid.marked?.[y]?.[x] ?? false)
+}
+
+export function markGridCell(grid: Grid, [x, y]: Coord) {
+  if (isInGrid(grid, [x, y])) {
+    grid.marked![y][x] = true
+  }
+}
+
 export function isEqualCoord([x1, y1]: Coord, [x2, y2]: Coord): boolean {
   return x1 === x2 && y1 === y2
 }
@@ -78,3 +94,15 @@ export function findCellMatches(grid: Grid, char: string): Coord[] {
   }
   return matches
 }
+
+export function* gridIterator(grid: Grid): Generator<string, void, unknown> {
+  for (let y = 0; y < grid.height; y++) {
+    for (let x = 0; x < grid.width; x++) {
+      yield grid.cells[y][x]
+    }
+  }
+}
+
+// for (const cell of gridIterator(grid)) {
+//   console.log(cell)
+// }

@@ -14,8 +14,9 @@ export function answer() {
   try {
     printLines(lines)
     printGrid(grid)
-  } catch (e) {
-    log(`Error: ${e}`)
+  } catch (e: any) {
+    log(`Error: ${e.message}`)
+    log(`Stack Trace:\n${e.stack}`)
   }
 
   return total
