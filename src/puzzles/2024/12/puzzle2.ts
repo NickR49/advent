@@ -38,9 +38,9 @@ function processRegion(
     const adj2 = getGridCell(grid, [x, y + dy])
     const diag = getGridCell(grid, [x + dx, y + dy])
     if (adj1 !== char && adj2 !== char) {
-      corners++
+      corners++ // External corner
     } else if (adj1 === char && adj2 === char && diag !== char) {
-      corners++
+      corners++ // Internal corner
     }
   }
 
