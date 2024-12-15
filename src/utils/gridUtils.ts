@@ -83,6 +83,21 @@ export function uniqueCoords(coords: Coord[]): Coord[] {
   return uniqueCoords
 }
 
+export function addUniqueCoord(coords: Coord[], coord: Coord): Coord[] {
+  if (!containsCoord(coords, coord)) {
+    coords.push(coord)
+  }
+  return coords
+}
+
+export function compareCoordinates([x1, y1]: Coord, [x2, y2]: Coord): number {
+  return y1 - y2 || x1 - x2
+}
+
+export function sortCoords(coords: Coord[]): Coord[] {
+  return coords.toSorted((a, b) => compareCoordinates(a, b))
+}
+
 export function findCellMatches(grid: Grid, char: string): Coord[] {
   const matches: Coord[] = []
   for (let y = 0; y < grid.height; y++) {
