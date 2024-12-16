@@ -25,10 +25,7 @@ export type Direction = [y: number, x: number]
 export type Coord = [x: number, y: number]
 
 export function getGridCell(grid: Grid, [x, y]: Coord): string | undefined {
-  if (x < 0 || x >= grid.width || y < 0 || y >= grid.height) {
-    return undefined
-  }
-  return grid.cells[y][x]
+  return isInGrid(grid, [x, y]) ? grid.cells[y][x] : undefined
 }
 
 export function setGridCell(grid: Grid, [x, y]: Coord, char: string) {
@@ -63,6 +60,12 @@ export function markGridCell(grid: Grid, [x, y]: Coord) {
   if (isInGrid(grid, [x, y])) {
     grid.marked![y][x] = true
   }
+}
+
+export function resetMarked(grid: Grid) {
+  grid.marked = Array(grid.height)
+    .fill(false)
+    .map(() => Array(grid.width).fill(false))
 }
 
 export function isEqualCoord([x1, y1]: Coord, [x2, y2]: Coord): boolean {
