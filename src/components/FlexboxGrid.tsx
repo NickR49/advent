@@ -9,13 +9,22 @@ interface Props {
 
 export default function FlexboxGrid(props: Props) {
   return (
-    <div class='flex flex-col border border-gray-400'>
-      {props.grid.cells.map((row) => (
+    <div class='flex flex-col'>
+      <div class='flex flex-row'>
+        <div class='h-7 w-7'></div>
+        {props.grid.cells[0].map((_, xIndex) => (
+          <div class='w-7'>{xIndex}</div>
+        ))}
+      </div>
+      {props.grid.cells.map((row, yIndex) => (
         <div class='flex flex-row'>
+          <div class='w-7'>{yIndex}</div>
           {row.map((cell) => (
             <div
               class={cn(
                 'flex w-7 h-7 justify-center items-center border border-gray-400',
+                cell === '#' && 'bg-gray-600',
+                cell === '.' && 'bg-gray-300',
                 cell === '0' && 'bg-white',
                 cell === '1' && 'bg-green-500',
               )}
