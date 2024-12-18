@@ -1,3 +1,5 @@
+import { getGridCell, Grid } from './gridUtils'
+
 export function dijkstra(
   graph: Record<string, Record<string, number>>,
   start: string,
@@ -47,14 +49,14 @@ export function dijkstra(
 
 export type Graph = Record<string, Record<string, number>>
 
-export function createGraphFromMaze(maze: string[]): {
+export function createGraphFromMaze(maze: Grid): {
   graph: Graph
   start: string
   end: string
 } {
   const graph: Graph = {}
-  const rows = maze.length
-  const cols = maze[0].length
+  const rows = maze.height
+  const cols = maze.width
   let start = ''
   let end = ''
 
@@ -62,7 +64,7 @@ export function createGraphFromMaze(maze: string[]): {
 
   for (let row = 0; row < rows; row++) {
     for (let col = 0; col < cols; col++) {
-      const cell = maze[row][col]
+      const cell = getGridCell(maze, [row, col])
       if (cell === '#') continue
 
       const nodeKey = getNodeKey(row, col)
@@ -86,7 +88,7 @@ export function createGraphFromMaze(maze: string[]): {
           newRow < rows &&
           newCol >= 0 &&
           newCol < cols &&
-          maze[newRow][newCol] !== '#'
+          getGridCell(maze, [newRow, newCol]) !== '#'
         ) {
           const neighborKey = getNodeKey(newRow, newCol)
           graph[nodeKey][neighborKey] = 1

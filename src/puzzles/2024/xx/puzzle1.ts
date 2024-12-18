@@ -9,6 +9,7 @@ const lines = getLines(data)
 const grid = getGrid(data)
 
 export function answer() {
+  const startTime = new Date().getTime()
   let total = 0
 
   try {
@@ -19,6 +20,8 @@ export function answer() {
     log(`Stack Trace:\n${e.stack}`)
   }
 
+  const endTime = new Date().getTime()
+  log(`Time to run: ${endTime - startTime}ms`)
   return total
 }
 
