@@ -8,7 +8,7 @@ export default function Puzzle() {
   const puzzle = () => (params.day.slice(2, 3) === 'b' ? 2 : 1)
 
   return (
-    <main class='flex flex-col text-center mx-auto text-gray-700 p-4 gap-8'>
+    <main class='flex flex-col text-center mx-auto text-gray-700 py-4 gap-8'>
       <span class='flex gap-4 justify-center items-baseline'>
         <h1 class='max-6-xs text-3xl text-sky-700 font-thin'>
           {params.year}-{day}

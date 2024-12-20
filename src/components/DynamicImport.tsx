@@ -54,7 +54,9 @@ const DynamicImportComponent = () => {
       <Result result={answer()} confirmedResult={confirmedAnswer()} />
       {/* {codeHtml() && <CodeBlock code={codeHtml()} />} */}
       <Show when={grid()}>
-        <FlexboxGrid grid={grid()!} />
+        <div class='w-dvw overflow-x-scroll'>
+          <FlexboxGrid grid={grid()!} />
+        </div>
       </Show>
     </div>
   )
