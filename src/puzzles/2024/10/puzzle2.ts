@@ -8,9 +8,8 @@ import {
 import { log } from '~/utils/log'
 import data from './input.txt?raw'
 import moduleText from './puzzle2.ts?raw'
-export { moduleText }
 
-const grid = getGrid(data)
+export const grid = getGrid(data)
 
 function checkCoord(coord: Coord, height: number): Coord[] {
   if (!isInGrid(grid, coord)) {
@@ -51,4 +50,4 @@ export function answer() {
 }
 
 export const confirmedAnswer = 1192
-export { grid }
+export default moduleText

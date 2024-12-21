@@ -2,7 +2,6 @@ import { isEqual } from 'lodash'
 import { getLines } from '~/utils/lineUtils'
 import data from './input.txt?raw'
 import moduleText from './puzzle1.ts?raw'
-export { moduleText }
 
 interface PageOrderingRule {
   first: number
@@ -59,3 +58,4 @@ export function answer() {
 }
 
 export const confirmedAnswer = 7074
+export default moduleText

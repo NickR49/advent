@@ -9,9 +9,8 @@ import {
 import { log } from '~/utils/log'
 import data from './input.txt?raw'
 import moduleText from './puzzle1.ts?raw'
-export { moduleText }
 
-const grid = getGrid(data)
+export const grid = getGrid(data)
 
 function processRegion(char: string, [x, y]: Coord): [number, number] {
   if (getGridCell(grid, [x, y]) === char) {
@@ -70,4 +69,4 @@ export function answer() {
 }
 
 export const confirmedAnswer = 1546338
-export { grid }
+export default moduleText

@@ -1,7 +1,6 @@
 import { log } from '~/utils/log'
 import data from './input.txt?raw'
 import moduleText from './puzzle2.ts?raw'
-export { moduleText }
 
 const patterns = data.split('\n\n')[0].split(', ')
 const towelsToMake = data.split('\n\n')[1].split('\n')
@@ -49,3 +48,4 @@ export function answer() {
 }
 
 export const confirmedAnswer = 919219286602165
+export default moduleText

@@ -4,7 +4,6 @@ import { getLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
 import data from './input.txt?raw'
 import moduleText from './puzzle2.ts?raw'
-export { moduleText }
 
 const lines = getLines(data)
 
@@ -17,7 +16,7 @@ const cells = Array(dimensions)
   .fill('.')
   .map(() => Array(dimensions).fill('.'))
 
-const grid: Grid = { cells, height: dimensions, width: dimensions }
+export const grid: Grid = { cells, height: dimensions, width: dimensions }
 setGridCell(grid, [0, 0], 'S')
 setGridCell(grid, [dimensions - 1, dimensions - 1], 'E')
 
@@ -54,4 +53,4 @@ export function answer() {
 }
 
 export const confirmedAnswer = '41,26'
-export { grid }
+export default moduleText

@@ -9,9 +9,8 @@ import {
 } from '~/utils/gridUtils'
 import data from './input.txt?raw'
 import moduleText from './puzzle2.ts?raw'
-export { moduleText }
 
-const grid = getGrid(data)
+export const grid = getGrid(data)
 const gridCopy = cloneDeep(grid)
 
 const nodeChars =
@@ -112,4 +111,4 @@ export function answer() {
 }
 
 export const confirmedAnswer = 1246
-export { gridCopy as grid }
+export default moduleText

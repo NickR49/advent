@@ -1,6 +1,5 @@
 import data from './input.txt?raw'
 import moduleText from './puzzle1.ts?raw'
-export { moduleText }
 
 function reverseString(str: string): string {
   return str.split('').reverse().join('')
@@ -22,3 +21,5 @@ export function answer() {
   // 54331
   return total
 }
+
+export default moduleText

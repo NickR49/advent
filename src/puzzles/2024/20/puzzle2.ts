@@ -3,10 +3,9 @@ import { getLines, printLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
 import moduleText from './puzzle2.ts?raw'
 import data from './sample.txt?raw'
-export { moduleText }
 
 const lines = getLines(data)
-const grid = getGrid(data)
+export const grid = getGrid(data)
 
 export function answer() {
   const startTime = new Date().getTime()
@@ -25,5 +24,6 @@ export function answer() {
   return total
 }
 
+answer()
+
 // export const confirmedAnswer =
-// export { grid }

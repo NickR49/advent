@@ -1,9 +1,8 @@
 import { Coord, getGrid, getGridCell } from '~/utils/gridUtils'
 import data from './input.txt?raw'
 import moduleText from './puzzle2.ts?raw'
-export { moduleText }
 
-const grid = getGrid(data)
+export const grid = getGrid(data)
 
 function checkWord([x, y]: Coord): boolean {
   const nwtse =
@@ -41,4 +40,4 @@ export function answer() {
 }
 
 export const confirmedAnswer = 1864
-export { grid }
+export default moduleText

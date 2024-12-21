@@ -7,9 +7,8 @@ import {
 } from '~/utils/gridUtils'
 import data from './input.txt?raw'
 import moduleText from './puzzle1.ts?raw'
-export { moduleText }
 
-const grid = getGrid(data)
+export const grid = getGrid(data)
 
 let directionIndex = 0
 const directions: Direction[] = [
@@ -91,4 +90,4 @@ export function answer() {
 }
 
 export const confirmedAnswer = 5177
-export { grid }
+export default moduleText

@@ -1,7 +1,6 @@
 import { getLines } from '~/utils/lineUtils'
 import data from './input.txt?raw'
 import moduleText from './puzzle1.ts?raw'
-export { moduleText }
 
 export function answer() {
   let total = 0
@@ -24,3 +23,4 @@ export function answer() {
 }
 
 export const confirmedAnswer = 1151792
+export default moduleText

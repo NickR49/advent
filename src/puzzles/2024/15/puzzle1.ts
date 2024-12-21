@@ -11,13 +11,12 @@ import { getLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
 import data from './input.txt?raw'
 import moduleText from './puzzle1.ts?raw'
-export { moduleText }
 
 const lines = getLines(data)
 const blankIndex = lines.indexOf('')
 const map = lines.slice(0, blankIndex)
 const moves = lines.slice(blankIndex).join('').split('')
-const grid = getGrid(map.join('\n'))
+export const grid = getGrid(map.join('\n'))
 
 function getDirection(move: string): [number, number] {
   switch (move) {
@@ -96,4 +95,4 @@ export function answer() {
 }
 
 export const confirmedAnswer = 1568399
-export { grid }
+export default moduleText

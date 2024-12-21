@@ -13,7 +13,6 @@ import { getLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
 import data from './input.txt?raw'
 import moduleText from './puzzle2.ts?raw'
-export { moduleText }
 
 const lines = getLines(data)
 const blankIndex = lines.indexOf('')
@@ -27,7 +26,7 @@ const doubledMapLines = mapLines.map((line) => {
     .replaceAll('#', '##')
     .replaceAll('@', '@.')
 })
-const grid = getGrid(doubledMapLines.join('\n'))
+export const grid = getGrid(doubledMapLines.join('\n'))
 
 // Get all the robot moves
 const moves = lines.slice(blankIndex).join('').split('')
@@ -182,4 +181,4 @@ export function answer() {
 }
 
 export const confirmedAnswer = 1575877
-export { grid }
+export default moduleText

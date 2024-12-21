@@ -14,9 +14,8 @@ import {
 import { log } from '~/utils/log'
 import data from './input.txt?raw'
 import moduleText from './puzzle1.ts?raw'
-export { moduleText }
 
-let grid = getGrid(data)
+export let grid = getGrid(data)
 
 // This will permanently mark the deadends
 const deadend = Array(grid.height)
@@ -146,4 +145,4 @@ export function answer() {
 }
 
 // export const confirmedAnswer =
-export { grid }
+export default moduleText

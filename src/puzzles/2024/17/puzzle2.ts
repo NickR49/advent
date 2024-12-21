@@ -1,7 +1,6 @@
 import { log } from '~/utils/log'
 import data from './input.txt?raw'
 import moduleText from './puzzle2.ts?raw'
-export { moduleText }
 
 const programString = data.split('\n\n')[1].split(' ')[1]
 const program = programString.split(',').map(Number)
@@ -118,3 +117,4 @@ export function answer() {
 }
 
 // export const confirmedAnswer =
+export default moduleText

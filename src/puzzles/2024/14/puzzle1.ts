@@ -9,14 +9,13 @@ import { getLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
 import data from './input.txt?raw'
 import moduleText from './puzzle1.ts?raw'
-export { moduleText }
 
 const lines = getLines(data)
 const isSample = false
 const width = isSample ? 11 : 101
 const height = isSample ? 7 : 103
 
-const grid: Grid = {
+export const grid: Grid = {
   width,
   height,
   cells: Array(height)
@@ -102,4 +101,4 @@ export function answer() {
 }
 
 export const confirmedAnswer = 216027840
-export { grid }
+export default moduleText

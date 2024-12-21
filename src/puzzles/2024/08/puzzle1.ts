@@ -11,9 +11,8 @@ import {
 import { log } from '~/utils/log'
 import data from './input.txt?raw'
 import moduleText from './puzzle1.ts?raw'
-export { moduleText }
 
-const grid = getGrid(data)
+export const grid = getGrid(data)
 const gridCopy = cloneDeep(grid)
 
 const nodeChars =
@@ -110,4 +109,4 @@ export function answer() {
 }
 
 export const confirmedAnswer = 390
-export { grid }
+export default moduleText

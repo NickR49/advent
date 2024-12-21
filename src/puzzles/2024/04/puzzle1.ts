@@ -1,9 +1,8 @@
 import { Coord, Direction, getGrid, getGridCell } from '~/utils/gridUtils'
 import data from './input.txt?raw'
 import moduleText from './puzzle1.ts?raw'
-export { moduleText }
 
-const grid = getGrid(data)
+export const grid = getGrid(data)
 
 const word = 'XMAS'
 
@@ -54,4 +53,4 @@ export function answer() {
 }
 
 export const confirmedAnswer = 2468
-export { grid }
+export default moduleText
