@@ -1,4 +1,5 @@
 import { getLines } from './lineUtils'
+import { log } from './log'
 
 export interface Grid {
   width: number
@@ -111,6 +112,10 @@ export function findCellMatches(grid: Grid, char: string): Coord[] {
     }
   }
   return matches
+}
+
+export function calcCoord([cx, cy]: Coord, [dx, dy]: Direction): Coord {
+  return [cx + dx, cy + dy]
 }
 
 export function* gridIterator(grid: Grid): Generator<string, void, unknown> {
