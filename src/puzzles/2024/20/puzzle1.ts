@@ -9,14 +9,13 @@ import {
   setGridCell,
 } from '~/utils/gridUtils'
 import { log } from '~/utils/log'
-import data from './input.txt?raw'
+import data from './sample.txt?raw'
 import moduleText from './puzzle1.ts?raw'
-export { moduleText }
 
-const isSample = false
+const isSample = true
 const stepsToSave = isSample ? 20 : 100
 
-const grid = getGrid(data)
+export const grid = getGrid(data)
 
 function isFreeCell(grid: Grid, coord: Coord): boolean {
   return ['.', 'S', 'E'].includes(getGridCell(grid, coord) ?? '')
@@ -40,6 +39,7 @@ function getCheatBlocks(grid: Grid): Coord[] {
   return blocks
 }
 
+// TODO Optimise this brute force solution
 export function answer() {
   const startTime = new Date().getTime()
   let total = 0
@@ -88,5 +88,7 @@ export function answer() {
   return total
 }
 
-// export const confirmedAnswer =
-export { grid }
+answer()
+
+export const confirmedAnswer = 1459
+// export default moduleText

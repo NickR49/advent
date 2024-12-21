@@ -25,8 +25,8 @@ const DynamicImportComponent = () => {
       try {
         const module = await import(modulePath)
         if (module && typeof module.answer === 'function') {
-          if (module.moduleText) {
-            const html = await codeToHtml(module.moduleText, {
+          if (module.default) {
+            const html = await codeToHtml(module.default, {
               lang: 'typescript',
               theme: 'dark-plus',
             })
@@ -52,7 +52,7 @@ const DynamicImportComponent = () => {
   return (
     <div class='flex flex-col gap-2 items-center'>
       <Result result={answer()} confirmedResult={confirmedAnswer()} />
-      {/* {codeHtml() && <CodeBlock code={codeHtml()} />} */}
+      {codeHtml() && <CodeBlock code={codeHtml()} />}
       <Show when={grid()}>
         <div class='w-dvw overflow-x-scroll'>
           <FlexboxGrid grid={grid()!} />

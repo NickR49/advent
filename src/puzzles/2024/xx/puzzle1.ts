@@ -3,18 +3,16 @@ import { getLines, printLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
 import moduleText from './puzzle1.ts?raw'
 import data from './sample.txt?raw'
-export { moduleText }
 
-const lines = getLines(data)
-const grid = getGrid(data)
+// const lines = getLines(data)
+// export const grid = getGrid(data)
 
 export function answer() {
   const startTime = new Date().getTime()
   let total = 0
 
   try {
-    printLines(lines)
-    printGrid(grid)
+    // Get to it . . .
   } catch (e: any) {
     log(`Error: ${e.message}`)
     log(`Stack Trace:\n${e.stack}`)
@@ -25,5 +23,7 @@ export function answer() {
   return total
 }
 
+answer()
+
 // export const confirmedAnswer =
-// export { grid }
+// export default moduleText
