@@ -13,11 +13,11 @@ const DynamicImportComponent = () => {
   const [confirmedAnswer, setConfirmedAnswer] = createSignal<number>()
   const [codeHtml, setCodeHtml] = createSignal<string>()
   const [grid, setGrid] = createSignal<Grid>()
-  const puzzle = () => (params.day.slice(2, 3) === 'b' ? 2 : 1)
+  const puzzle = () => (params.day?.slice(2, 3) === 'b' ? 2 : 1)
 
   createEffect(async () => {
     const year = params.year
-    const day = params.day.slice(0, 2)
+    const day = params.day?.slice(0, 2)
 
     if (year && day && puzzle) {
       const modulePath = `../puzzles/${year}/${day}/puzzle${puzzle()}.ts`
