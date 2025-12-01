@@ -1,4 +1,5 @@
-import { A, useParams } from '@solidjs/router'
+import { useParams } from '@solidjs/router'
+import Link from '~/components/Link'
 
 export default function PuzzleList() {
   const params = useParams()
@@ -21,12 +22,7 @@ export default function PuzzleList() {
       {[...puzzleSet]
         .filter((puzzle) => puzzle.slice(0, 4) === params.year)
         .map((puzzle) => (
-          <A
-            href={`/puzzle/${puzzle.replace('-', '/')}`}
-            class='text-sky-600 hover:underline'
-          >
-            {puzzle}
-          </A>
+          <Link href={`/puzzle/${puzzle.replace('-', '/')}`}>{puzzle}</Link>
         ))}
     </div>
   )

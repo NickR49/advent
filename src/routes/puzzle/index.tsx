@@ -1,4 +1,4 @@
-import { A } from '@solidjs/router'
+import Link from '~/components/Link'
 
 export default function PuzzleList() {
   // Identify all the folder names in the src/puzzles directory
@@ -17,12 +17,7 @@ export default function PuzzleList() {
   return (
     <div class='flex flex-col gap-1 p-6'>
       {[...puzzleSet].map((puzzle) => (
-        <A
-          href={`/puzzle/${puzzle.replace('-', '/')}`}
-          class='text-sky-600 hover:underline'
-        >
-          {puzzle}
-        </A>
+        <Link href={`/puzzle/${puzzle.replace('-', '/')}`}>{puzzle}</Link>
       ))}
     </div>
   )

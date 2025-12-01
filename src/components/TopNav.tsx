@@ -1,4 +1,5 @@
 import { useLocation } from '@solidjs/router'
+import Link from './Link'
 
 export default function TopNav() {
   const location = useLocation()
@@ -10,16 +11,29 @@ export default function TopNav() {
     <nav class='bg-sky-800'>
       <ul class='container flex items-center p-3 text-gray-200'>
         <li class={`border-b-2 ${active('/')} mx-1.5 sm:mx-6`}>
-          <a href='/'>Home</a>
+          <Link href='/' color='white'>
+            Home
+          </Link>
         </li>
         <li class={`border-b-2 ${active('/puzzle')} mx-1.5 sm:mx-6`}>
-          <a href='/puzzle'>Puzzle List</a>
+          <Link href='/puzzle' color='white'>
+            Puzzle List
+          </Link>
         </li>
         <li class={`border-b-2 ${active('/puzzle/2023')} mx-1.5 sm:mx-6`}>
-          <a href='/puzzle/2023'>2023</a>
+          <Link href='/puzzle/2023' color='white'>
+            2023
+          </Link>
         </li>
         <li class={`border-b-2 ${active('/puzzle/2024')} mx-1.5 sm:mx-6`}>
-          <a href='/puzzle/2024'>2024</a>
+          <Link href='/puzzle/2024' color='white'>
+            2024
+          </Link>
+        </li>
+        <li class={`border-b-2 ${active('/puzzle/2025')} mx-1.5 sm:mx-6`}>
+          <Link href='/puzzle/2025' color='white'>
+            2025
+          </Link>
         </li>
       </ul>
     </nav>

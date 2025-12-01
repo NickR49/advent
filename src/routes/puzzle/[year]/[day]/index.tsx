@@ -1,6 +1,6 @@
 import { useParams } from '@solidjs/router'
 import DynamicImportComponent from '~/components/DynamicImport'
-import { cn } from '~/utils/cn'
+import Link from '~/components/Link'
 
 export default function Puzzle() {
   const params = useParams()
@@ -13,22 +13,12 @@ export default function Puzzle() {
         <h1 class='max-6-xs text-3xl text-sky-700 font-thin'>
           {params.year}-{day}
         </h1>
-        <a
-          href={`./${day}a`}
-          class={cn(
-            puzzle() === 1 ? 'text-gray-900' : 'text-blue-600 underline',
-          )}
-        >
+        <Link href={`./${day}a`} selected={puzzle() === 1}>
           Puzzle 1
-        </a>
-        <a
-          href={`./${day}b`}
-          class={cn(
-            puzzle() === 2 ? 'text-gray-900' : 'text-blue-600 underline',
-          )}
-        >
+        </Link>
+        <Link href={`./${day}b`} selected={puzzle() === 2}>
           Puzzle 2
-        </a>
+        </Link>
       </span>
       <DynamicImportComponent />
     </main>

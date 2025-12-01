@@ -1,4 +1,4 @@
-import { A } from '@solidjs/router'
+import Link from '~/components/Link'
 
 export default function NotFound() {
   return (
@@ -8,23 +8,13 @@ export default function NotFound() {
       </h1>
       <p class='mt-8'>
         Visit{' '}
-        <a
-          href='https://solidjs.com'
-          target='_blank'
-          class='text-sky-600 hover:underline'
-        >
+        <Link href='https://solidjs.com' newTab>
           solidjs.com
-        </a>{' '}
+        </Link>{' '}
         to learn how to build Solid apps.
       </p>
       <p class='my-4'>
-        <A href='/' class='text-sky-600 hover:underline'>
-          Home
-        </A>
-        {' - '}
-        <A href='/about' class='text-sky-600 hover:underline'>
-          About Page
-        </A>
+        <Link href='/'>Home</Link>
       </p>
     </main>
   )
