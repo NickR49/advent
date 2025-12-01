@@ -1,18 +1,44 @@
-import { getGrid, printGrid } from '~/utils/gridUtils'
-import { getLines, printLines } from '~/utils/lineUtils'
+import { getLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
+import data from './input.txt?raw'
 import moduleText from './puzzle2.ts?raw'
-import data from './sample.txt?raw'
 
-// const lines = getLines(data)
-// export const grid = getGrid(data)
+const lines = getLines(data)
 
 export function answer() {
   const startTime = new Date().getTime()
   let total = 0
 
   try {
-    // Get to it . . .
+    const positions = 100
+    let position = 50
+    for (const line of lines) {
+      const direction = line[0]
+      const clicks = parseInt(line.slice(1), 10)
+      switch (direction) {
+        case 'L':
+          for (let i = 0; i < clicks; i++) {
+            position -= 1
+            if (position === 0) {
+              total += 1
+            } else if (position === -1) {
+              position = positions - 1
+            }
+          }
+          break
+        case 'R':
+          for (let i = 0; i < clicks; i++) {
+            position += 1
+            if (position === positions) {
+              position = 0
+              total += 1
+            }
+          }
+          break
+        default:
+          throw new Error(`Unknown direction: ${direction}`)
+      }
+    }
   } catch (e: any) {
     log(`Error: ${e.message}`)
     log(`Stack Trace:\n${e.stack}`)
@@ -25,5 +51,5 @@ export function answer() {
 
 answer()
 
-// export const confirmedAnswer =
-// export default moduleText
+export const confirmedAnswer = 6932
+export default moduleText

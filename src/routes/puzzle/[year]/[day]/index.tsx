@@ -13,10 +13,10 @@ export default function Puzzle() {
         <h1 class='max-6-xs text-3xl text-sky-700 font-thin'>
           {params.year}-{day}
         </h1>
-        <Link href={`./${day}a`} selected={puzzle() === 1}>
+        <Link href={`../${day}a`} selected={puzzle() === 1}>
           Puzzle 1
         </Link>
-        <Link href={`./${day}b`} selected={puzzle() === 2}>
+        <Link href={`../${day}b`} selected={puzzle() === 2}>
           Puzzle 2
         </Link>
       </span>
