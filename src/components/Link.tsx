@@ -1,3 +1,4 @@
+import { A } from '@solidjs/router'
 import { cn } from '~/utils/cn'
 
 interface Props {
@@ -11,7 +12,7 @@ interface Props {
 export default function Link(props: Props) {
   const color = props.color || 'text-blue-500'
   return (
-    <a
+    <A
       target={props.newTab ? '_blank' : undefined}
       href={props.href}
       class={cn(
@@ -22,6 +23,6 @@ export default function Link(props: Props) {
       )}
     >
       {props.children}
-    </a>
+    </A>
   )
 }
