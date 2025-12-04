@@ -1,6 +1,5 @@
 import { cn } from '~/utils/cn'
 import { Grid, isMarked } from '~/utils/gridUtils'
-import { log } from '~/utils/log'
 import './CodeBlock.css'
 
 interface Props {

@@ -8,6 +8,7 @@
     "update": "taze --interactive --recursive --install --timediff false"
   },
   "dependencies": {
+    "@solidjs/meta": "^0.29.4",
     "@solidjs/router": "^0.15.4",
     "@solidjs/start": "^1.2.0",
     "autoprefixer": "^10.4.22",

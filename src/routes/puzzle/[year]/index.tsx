@@ -1,3 +1,4 @@
+import { Title } from '@solidjs/meta'
 import { useParams } from '@solidjs/router'
 import Link from '~/components/Link'
 
@@ -18,12 +19,15 @@ export default function PuzzleList() {
   })
 
   return (
-    <div class='flex flex-col gap-1 p-6'>
-      {[...puzzleSet]
-        .filter((puzzle) => puzzle.slice(0, 4) === params.year)
-        .map((puzzle) => (
-          <Link href={`/puzzle/${puzzle.replace('-', '/')}`}>{puzzle}</Link>
-        ))}
+    <div>
+      <Title>{`${params.year} puzzles`}</Title>
+      <div class='flex flex-col gap-1 p-6'>
+        {[...puzzleSet]
+          .filter((puzzle) => puzzle.slice(0, 4) === params.year)
+          .map((puzzle) => (
+            <Link href={`/puzzle/${puzzle.replace('-', '/')}`}>{puzzle}</Link>
+          ))}
+      </div>
     </div>
   )
 }

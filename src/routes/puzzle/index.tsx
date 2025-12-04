@@ -1,3 +1,4 @@
+import { Title } from '@solidjs/meta'
 import Link from '~/components/Link'
 
 export default function PuzzleList() {
@@ -15,10 +16,13 @@ export default function PuzzleList() {
   })
 
   return (
-    <div class='flex flex-col gap-1 p-6'>
-      {[...puzzleSet].map((puzzle) => (
-        <Link href={`/puzzle/${puzzle.replace('-', '/')}`}>{puzzle}</Link>
-      ))}
+    <div>
+      <Title>Puzzle List</Title>
+      <div class='flex flex-col gap-1 p-6'>
+        {[...puzzleSet].map((puzzle) => (
+          <Link href={`/puzzle/${puzzle.replace('-', '/')}`}>{puzzle}</Link>
+        ))}
+      </div>
     </div>
   )
 }
