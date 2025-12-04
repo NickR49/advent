@@ -126,6 +126,41 @@ export function* gridIterator(grid: Grid): Generator<string, void, unknown> {
   }
 }
 
+export function* gridMarkedIterator(
+  grid: Grid,
+): Generator<boolean | undefined, void, unknown> {
+  for (let y = 0; y < grid.height; y++) {
+    for (let x = 0; x < grid.width; x++) {
+      yield grid.marked?.[y][x]
+    }
+  }
+}
+
+export function gridMarkedCount(grid: Grid): number {
+  return gridMarkedIterator(grid).reduce(
+    (acc, value) => (value ? acc + 1 : acc),
+    0,
+  )
+}
+
 // for (const cell of gridIterator(grid)) {
 //   console.log(cell)
 // }
+
+export const eightDirections: Direction[] = [
+  [-1, -1],
+  [-1, 0],
+  [-1, 1],
+  [0, -1],
+  [0, 1],
+  [1, -1],
+  [1, 0],
+  [1, 1],
+]
+
+export const fourDirections: Direction[] = [
+  [-1, 0],
+  [0, -1],
+  [0, 1],
+  [1, 0],
+]
