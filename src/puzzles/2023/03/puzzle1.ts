@@ -1,5 +1,5 @@
 import data from './input.txt?raw'
-import moduleText from './puzzle1.ts?raw'
+export { default } from './puzzle1.ts?raw'
 
 interface SchematicNumber {
   value: number
@@ -80,4 +80,3 @@ export function answer() {
 }
 
 export const confirmedAnswer = 560670
-export default moduleText

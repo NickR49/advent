@@ -1,5 +1,5 @@
 import data from './input.txt?raw'
-import moduleText from './puzzle2.ts?raw'
+export { default } from './puzzle2.ts?raw'
 
 export function answer() {
   let total = 0
@@ -34,4 +34,3 @@ export function answer() {
 }
 
 export const confirmedAnswer = 66681
-export default moduleText

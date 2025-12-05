@@ -1,8 +1,8 @@
 import { getGrid, Grid, printGrid } from '~/utils/gridUtils'
 import { getLines, printLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
-import moduleText from './puzzle1.ts?raw'
 import data from './sample.txt?raw'
+export { default } from './puzzle1.ts?raw'
 
 // let lines: string[]
 // export let grid: Grid
@@ -26,4 +26,4 @@ export function answer() {
 answer()
 
 // export const confirmedAnswer =
-// export default moduleText
+//

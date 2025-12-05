@@ -1,8 +1,8 @@
 import { Coord, isEqualCoord } from '~/utils/gridUtils'
 import { getLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
-import moduleText from './puzzle2.ts?raw'
 import data from './sample2.txt?raw'
+export { default } from './puzzle2.ts?raw'
 
 const lines = getLines(data)
 
@@ -60,4 +60,3 @@ export function answer() {
 }
 
 // export const confirmedAnswer =
-export default moduleText

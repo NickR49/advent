@@ -1,5 +1,5 @@
 import data from './input.txt?raw'
-import moduleText from './puzzle1.ts?raw'
+export { default } from './puzzle1.ts?raw'
 
 function getCardPoints(card: string): number {
   let matchingCards = 0
@@ -33,4 +33,3 @@ export function answer() {
 }
 
 export const confirmedAnswer = 23847
-export default moduleText

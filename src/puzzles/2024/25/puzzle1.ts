@@ -1,7 +1,7 @@
 import { getGrid, getGridCell } from '~/utils/gridUtils'
 import { log } from '~/utils/log'
 import data from './input.txt?raw'
-import moduleText from './puzzle1.ts?raw'
+export { default } from './puzzle1.ts?raw'
 
 type Lock = number[]
 type Key = number[]
@@ -87,4 +87,3 @@ export function answer() {
 answer()
 
 export const confirmedAnswer = 3365
-export default moduleText

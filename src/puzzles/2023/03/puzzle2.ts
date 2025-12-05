@@ -1,5 +1,5 @@
 import data from './input.txt?raw'
-import moduleText from './puzzle2.ts?raw'
+export { default } from './puzzle2.ts?raw'
 
 interface SchematicAster {
   x: number
@@ -116,4 +116,3 @@ export function answer() {
 }
 
 export const confirmedAnswer = 91622824
-export default moduleText

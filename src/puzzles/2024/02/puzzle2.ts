@@ -1,7 +1,7 @@
 import { isEqual } from 'lodash'
 import { getLines } from '~/utils/lineUtils'
 import data from './input.txt?raw'
-import moduleText from './puzzle2.ts?raw'
+export { default } from './puzzle2.ts?raw'
 
 function extractReports(data: string): string[] {
   return getLines(data)
@@ -63,4 +63,3 @@ export function answer() {
 }
 
 export const confirmedAnswer = 528
-export default moduleText

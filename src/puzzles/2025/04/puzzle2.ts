@@ -10,7 +10,7 @@ import {
 } from '~/utils/gridUtils'
 import { log } from '~/utils/log'
 import data from './input.txt?raw'
-import moduleText from './puzzle2.ts?raw'
+export { default } from './puzzle2.ts?raw'
 
 export let grid: Grid
 
@@ -72,4 +72,3 @@ export function answer() {
 answer()
 
 export const confirmedAnswer = 8442
-export default moduleText

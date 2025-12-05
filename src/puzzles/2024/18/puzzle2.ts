@@ -3,7 +3,7 @@ import { Grid, setGridCell } from '~/utils/gridUtils'
 import { getLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
 import data from './input.txt?raw'
-import moduleText from './puzzle2.ts?raw'
+export { default } from './puzzle2.ts?raw'
 
 const lines = getLines(data)
 
@@ -50,4 +50,3 @@ export function answer() {
 }
 
 export const confirmedAnswer = '41,26'
-export default moduleText

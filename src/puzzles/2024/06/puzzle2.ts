@@ -7,7 +7,7 @@ import {
   setGridCell,
 } from '~/utils/gridUtils'
 import data from './input.txt?raw'
-import moduleText from './puzzle2.ts?raw'
+export { default } from './puzzle2.ts?raw'
 
 const originalData = data
 
@@ -180,4 +180,3 @@ export function answer() {
 }
 
 export const confirmedAnswer = 1686
-export default moduleText

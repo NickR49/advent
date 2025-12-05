@@ -1,6 +1,6 @@
 import { getLines } from '~/utils/lineUtils'
 import data from './input.txt?raw'
-import moduleText from './puzzle1.ts?raw'
+export { default } from './puzzle1.ts?raw'
 
 function calculate(values: number[], operations: string): number {
   let total = values[0]
@@ -61,4 +61,3 @@ export function answer() {
 }
 
 export const confirmedAnswer = 945512582195
-export default moduleText

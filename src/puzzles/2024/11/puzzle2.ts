@@ -1,5 +1,5 @@
 import { log } from '~/utils/log'
-import moduleText from './puzzle2.ts?raw'
+export { default } from './puzzle2.ts?raw'
 
 function splitNum(value: number): number[] {
   const str = String(value)
@@ -48,4 +48,3 @@ export function answer() {
 }
 
 export const confirmedAnswer = 218817038947400
-export default moduleText

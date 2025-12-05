@@ -1,5 +1,5 @@
 import data from './input.txt?raw'
-import moduleText from './puzzle2.ts?raw'
+export { default } from './puzzle2.ts?raw'
 
 const numbers = [
   'xxxxxxxxxxxxx',
@@ -48,4 +48,3 @@ export function answer() {
 }
 
 export const confirmedAnswer = 54518
-export default moduleText

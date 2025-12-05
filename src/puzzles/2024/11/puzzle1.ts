@@ -1,5 +1,5 @@
 import { log } from '~/utils/log'
-import moduleText from './puzzle1.ts?raw'
+export { default } from './puzzle1.ts?raw'
 
 function splitNum(value: number): number[] {
   const str = String(value)
@@ -39,4 +39,3 @@ export function answer() {
 }
 
 export const confirmedAnswer = 183484
-export default moduleText

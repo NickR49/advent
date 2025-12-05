@@ -8,7 +8,7 @@ import {
 } from '~/utils/gridUtils'
 import { log } from '~/utils/log'
 import data from './input.txt?raw'
-import moduleText from './puzzle2.ts?raw'
+export { default } from './puzzle2.ts?raw'
 
 export const grid = getGrid(data)
 
@@ -89,4 +89,3 @@ export function answer() {
 }
 
 export const confirmedAnswer = 978590
-export default moduleText

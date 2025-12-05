@@ -9,8 +9,8 @@ import {
   setGridCell,
 } from '~/utils/gridUtils'
 import { log } from '~/utils/log'
-import moduleText from './puzzle1.ts?raw'
 import data from './sample.txt?raw'
+export { default } from './puzzle1.ts?raw'
 
 const isSample = true
 const stepsToSave = isSample ? 20 : 100
@@ -88,4 +88,4 @@ export function answer() {
 answer()
 
 export const confirmedAnswer = 1459
-// export default moduleText
+//

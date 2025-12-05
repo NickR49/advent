@@ -9,8 +9,8 @@ import {
   printGrid,
 } from '~/utils/gridUtils'
 import { log } from '~/utils/log'
-import moduleText from './puzzle1.ts?raw'
 import data from './sample.txt?raw'
+export { default } from './puzzle1.ts?raw'
 
 const numPadRaw = `789
 456
@@ -135,4 +135,4 @@ export function answer() {
 answer()
 
 export const confirmedAnswer = 203814
-// export default moduleText
+//

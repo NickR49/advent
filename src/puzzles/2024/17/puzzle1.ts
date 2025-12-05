@@ -1,6 +1,6 @@
 import { log } from '~/utils/log'
 import data from './input.txt?raw'
-import moduleText from './puzzle1.ts?raw'
+export { default } from './puzzle1.ts?raw'
 
 let [A, B, C] = data
   .split('\n\n')[0]
@@ -102,4 +102,3 @@ export function answer() {
 }
 
 export const confirmedAnswer = '2,1,0,4,6,2,4,2,0'
-export default moduleText

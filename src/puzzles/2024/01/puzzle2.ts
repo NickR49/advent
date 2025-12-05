@@ -1,6 +1,6 @@
 import { getLines } from '~/utils/lineUtils'
 import data from './input.txt?raw'
-import moduleText from './puzzle2.ts?raw'
+export { default } from './puzzle2.ts?raw'
 
 export function answer() {
   // Extract the two lists
@@ -23,4 +23,3 @@ export function answer() {
 }
 
 export const confirmedAnswer = 21790168
-export default moduleText

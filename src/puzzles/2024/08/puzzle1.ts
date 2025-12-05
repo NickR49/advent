@@ -10,7 +10,7 @@ import {
 } from '~/utils/gridUtils'
 import { log } from '~/utils/log'
 import data from './input.txt?raw'
-import moduleText from './puzzle1.ts?raw'
+export { default } from './puzzle1.ts?raw'
 
 export const grid = getGrid(data)
 const gridCopy = cloneDeep(grid)
@@ -109,4 +109,3 @@ export function answer() {
 }
 
 export const confirmedAnswer = 390
-export default moduleText

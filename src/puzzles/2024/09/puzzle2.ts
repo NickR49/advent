@@ -1,5 +1,5 @@
 import data from './input.txt?raw'
-import moduleText from './puzzle2.ts?raw'
+export { default } from './puzzle2.ts?raw'
 
 type Entry = number | undefined
 
@@ -105,4 +105,3 @@ export function answer() {
 }
 
 export const confirmedAnswer = 6379677752410
-export default moduleText
