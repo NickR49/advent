@@ -11,8 +11,6 @@ export function answer() {
   // lines = getLines(data)
   // grid = getGrid(data)
 
-  const startTime = new Date().getTime()
-
   let total = 0
 
   try {
@@ -22,8 +20,6 @@ export function answer() {
     log(`Stack Trace:\n${e.stack}`)
   }
 
-  const endTime = new Date().getTime()
-  log(`Time to run: ${endTime - startTime}ms`)
   return total
 }
 

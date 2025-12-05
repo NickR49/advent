@@ -9,8 +9,8 @@ import {
   setGridCell,
 } from '~/utils/gridUtils'
 import { log } from '~/utils/log'
-import data from './sample.txt?raw'
 import moduleText from './puzzle1.ts?raw'
+import data from './sample.txt?raw'
 
 const isSample = true
 const stepsToSave = isSample ? 20 : 100
@@ -41,7 +41,6 @@ function getCheatBlocks(grid: Grid): Coord[] {
 
 // TODO Optimise this brute force solution
 export function answer() {
-  const startTime = new Date().getTime()
   let total = 0
 
   try {
@@ -83,8 +82,6 @@ export function answer() {
     log(`Stack Trace:\n${e.stack}`)
   }
 
-  const endTime = new Date().getTime()
-  log(`Time to run: ${endTime - startTime}ms`)
   return total
 }
 

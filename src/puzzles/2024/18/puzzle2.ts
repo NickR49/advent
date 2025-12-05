@@ -21,7 +21,6 @@ setGridCell(grid, [0, 0], 'S')
 setGridCell(grid, [dimensions - 1, dimensions - 1], 'E')
 
 export function answer() {
-  const startTime = new Date().getTime()
   let total = ''
   const startPoint = isSample ? 0 : 1024
 
@@ -47,8 +46,6 @@ export function answer() {
     log(`Stack Trace:\n${e.stack}`)
   }
 
-  const endTime = new Date().getTime()
-  log(`Time to run: ${endTime - startTime}ms`)
   return total
 }
 

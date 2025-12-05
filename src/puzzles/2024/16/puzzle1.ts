@@ -122,13 +122,8 @@ export function answer() {
   let total = 0
 
   try {
-    const startTime = new Date().getTime()
-
     const { graph, start, end } = createGraphFromMaze(grid)
     const { score } = dijkstra(graph, start, end, 'right')
-
-    const endTime = new Date().getTime()
-    log(`Time to run: ${endTime - startTime}ms`)
 
     total = score
   } catch (e: any) {

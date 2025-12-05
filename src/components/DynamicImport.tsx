@@ -2,6 +2,7 @@ import { useParams } from '@solidjs/router'
 import { codeToHtml } from 'shiki'
 import { createEffect, createSignal, Show } from 'solid-js'
 import { Grid } from '~/utils/gridUtils'
+import { log } from '~/utils/log'
 import CodeBlock from './CodeBlock'
 import FlexboxGrid from './FlexboxGrid'
 import Result from './Result'
@@ -36,7 +37,14 @@ const DynamicImportComponent = () => {
               })
               setCodeHtml(html)
             }
+            const startTime = new Date().getTime()
             const answer = module.answer()
+            const endTime = new Date().getTime()
+            log(
+              `${year} - Day ${Number(day)} Puzzle ${puzzle()}: ${
+                endTime - startTime
+              }ms`,
+            )
             setAnswer(answer)
             const confirmedAnswer = module.confirmedAnswer
             setConfirmedAnswer(confirmedAnswer)
