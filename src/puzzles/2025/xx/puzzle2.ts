@@ -1,14 +1,18 @@
-import { getGrid, printGrid } from '~/utils/gridUtils'
+import { getGrid, Grid, printGrid } from '~/utils/gridUtils'
 import { getLines, printLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
 import moduleText from './puzzle2.ts?raw'
 import data from './sample.txt?raw'
 
-// const lines = getLines(data)
-// export const grid = getGrid(data)
+// let lines: string[]
+// export let grid: Grid
 
 export function answer() {
+  // lines = getLines(data)
+  // grid = getGrid(data)
+
   const startTime = new Date().getTime()
+
   let total = 0
 
   try {

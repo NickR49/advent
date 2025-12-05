@@ -4,6 +4,7 @@ import {
   eightDirections,
   getGrid,
   getGridCell,
+  Grid,
   gridMarkedCount,
   markGridCell,
 } from '~/utils/gridUtils'
@@ -11,7 +12,7 @@ import { log } from '~/utils/log'
 import data from './input.txt?raw'
 import moduleText from './puzzle1.ts?raw'
 
-export const grid = getGrid(data)
+export let grid: Grid
 
 function adjacentCellsCount(coord: Coord): number {
   let count = 0
@@ -26,7 +27,10 @@ function adjacentCellsCount(coord: Coord): number {
 }
 
 export function answer() {
+  grid = getGrid(data)
+
   const startTime = new Date().getTime()
+
   let total = 0
 
   try {
