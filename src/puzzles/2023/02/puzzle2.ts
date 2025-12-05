@@ -30,8 +30,8 @@ export function answer() {
     const gamePower = maxRed * maxGreen * maxBlue
     total += gamePower
   })
-  // 66681
   return total
 }
 
+export const confirmedAnswer = 66681
 export default moduleText

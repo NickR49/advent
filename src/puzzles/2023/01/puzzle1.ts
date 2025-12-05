@@ -18,8 +18,8 @@ export function answer() {
       }
     }
   })
-  // 54331
   return total
 }
 
+export const confirmedAnswer = 54331
 export default moduleText

@@ -76,8 +76,8 @@ export function answer() {
     .filter((num) => hasAdjacentSymbol(allLines, num))
     .forEach((num) => (total += num.value))
 
-  // 560670
   return total
 }
 
+export const confirmedAnswer = 560670
 export default moduleText

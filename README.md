@@ -34,6 +34,12 @@ Run the update
 bun update
 ```
 
+Run the puzzles
+
+```bash
+bun scripts/check-puzzles.ts
+```
+
 ## Building
 
 Solid apps are built with _presets_, which optimise your project for deployment to different environments.

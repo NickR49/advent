@@ -44,8 +44,8 @@ export function answer() {
       total += value
     }
   })
-  // 54518
   return total
 }
 
+export const confirmedAnswer = 54518
 export default moduleText

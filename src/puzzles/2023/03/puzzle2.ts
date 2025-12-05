@@ -112,8 +112,8 @@ export function answer() {
       }
     })
 
-  // 91622824
   return total
 }
 
+export const confirmedAnswer = 91622824
 export default moduleText

@@ -35,8 +35,8 @@ export function answer() {
       total += gameNumber
     }
   })
-  // 2237
   return total
 }
 
+export const confirmedAnswer = 2237
 export default moduleText

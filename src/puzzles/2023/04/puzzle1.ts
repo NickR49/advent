@@ -29,8 +29,8 @@ export function answer() {
     total += getCardPoints(line)
   })
 
-  // 23847
   return total
 }
 
+export const confirmedAnswer = 23847
 export default moduleText
