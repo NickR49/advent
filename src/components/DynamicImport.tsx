@@ -6,6 +6,8 @@ import CodeBlock from './CodeBlock'
 import FlexboxGrid from './FlexboxGrid'
 import Result from './Result'
 
+const puzzles = import.meta.glob('../puzzles/*/*/puzzle*.ts')
+
 const DynamicImportComponent = () => {
   const params = useParams()
 
@@ -23,23 +25,28 @@ const DynamicImportComponent = () => {
       const modulePath = `../puzzles/${year}/${day}/puzzle${puzzle()}.ts`
 
       try {
-        const module = await import(modulePath)
-        if (module && typeof module.answer === 'function') {
-          if (module.default) {
-            const html = await codeToHtml(module.default, {
-              lang: 'typescript',
-              theme: 'dark-plus',
-            })
-            setCodeHtml(html)
+        const loadModule = puzzles[modulePath]
+        if (loadModule) {
+          const module: any = await loadModule()
+          if (module && typeof module.answer === 'function') {
+            if (module.default) {
+              const html = await codeToHtml(module.default, {
+                lang: 'typescript',
+                theme: 'dark-plus',
+              })
+              setCodeHtml(html)
+            }
+            const answer = module.answer()
+            setAnswer(answer)
+            const confirmedAnswer = module.confirmedAnswer
+            setConfirmedAnswer(confirmedAnswer)
+            const grid = module.grid
+            setGrid(grid)
+          } else {
+            // console.error('The module does not export an answer function.')
           }
-          const answer = module.answer()
-          setAnswer(answer)
-          const confirmedAnswer = module.confirmedAnswer
-          setConfirmedAnswer(confirmedAnswer)
-          const grid = module.grid
-          setGrid(grid)
         } else {
-          // console.error('The module does not export an answer function.')
+          console.error(`Module not found in glob: ${modulePath}`)
         }
       } catch (error) {
         // console.error('Error loading module:', error)
