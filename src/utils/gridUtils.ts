@@ -1,5 +1,4 @@
 import { getLines } from './lineUtils'
-import { log } from './log'
 
 export interface Grid {
   width: number
@@ -163,4 +162,11 @@ export const fourDirections: Direction[] = [
   [0, -1],
   [0, 1],
   [1, 0],
+]
+
+export const diagonalDirections: Direction[] = [
+  [-1, -1],
+  [1, -1],
+  [1, 1],
+  [-1, 1],
 ]

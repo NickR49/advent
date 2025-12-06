@@ -1,7 +1,9 @@
 import {
   Coord,
+  diagonalDirections,
   getGrid,
   getGridCell,
+  Grid,
   isInGrid,
   isMarked,
   markGridCell,
@@ -10,7 +12,7 @@ import { log } from '~/utils/log'
 import data from './input.txt?raw'
 export { default } from './puzzle2.ts?raw'
 
-export const grid = getGrid(data)
+export let grid: Grid
 
 function processRegion(
   char: string,
@@ -27,12 +29,7 @@ function processRegion(
   let corners = 0
 
   // Count corners
-  for (const [dx, dy] of [
-    [-1, -1],
-    [1, -1],
-    [1, 1],
-    [-1, 1],
-  ]) {
+  for (const [dx, dy] of diagonalDirections) {
     const adj1 = getGridCell(grid, [x + dx, y])
     const adj2 = getGridCell(grid, [x, y + dy])
     const diag = getGridCell(grid, [x + dx, y + dy])
@@ -64,6 +61,7 @@ function processRegion(
 
 export function answer() {
   let total = 0
+  grid = getGrid(data)
 
   try {
     // Iterate through each cell in the grid and build up a count of cells

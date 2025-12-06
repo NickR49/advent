@@ -2,6 +2,7 @@ import {
   Coord,
   getGrid,
   getGridCell,
+  Grid,
   isInGrid,
   isMarked,
   markGridCell,
@@ -10,7 +11,7 @@ import { log } from '~/utils/log'
 import data from './input.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
-export const grid = getGrid(data)
+export let grid: Grid
 
 function processRegion(char: string, [x, y]: Coord): [number, number] {
   if (getGridCell(grid, [x, y]) === char) {
@@ -45,6 +46,7 @@ function processRegion(char: string, [x, y]: Coord): [number, number] {
 
 export function answer() {
   let total = 0
+  grid = getGrid(data)
 
   try {
     // Iterate through each cell in the grid and build up a count of cells and edges for each member of a region

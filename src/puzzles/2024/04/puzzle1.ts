@@ -1,4 +1,4 @@
-import { Coord, Direction, getGrid, getGridCell } from '~/utils/gridUtils'
+import { Coord, eightDirections, getGrid, getGridCell } from '~/utils/gridUtils'
 import data from './input.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
@@ -6,20 +6,9 @@ export const grid = getGrid(data)
 
 const word = 'XMAS'
 
-const directions: Direction[] = [
-  [0, -1],
-  [1, -1],
-  [1, 0],
-  [1, 1],
-  [0, 1],
-  [-1, 1],
-  [-1, 0],
-  [-1, -1],
-]
-
 function checkWord([x, y]: Coord): number {
   let wordMatches = 0
-  for (const d of directions) {
+  for (const d of eightDirections) {
     let charMatches = 1
     for (let i = 1; i < word.length; i++) {
       const coordToCheck: Coord = [x + d[0] * i, y + d[1] * i]
