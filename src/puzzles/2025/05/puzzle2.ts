@@ -5,7 +5,8 @@ export { default } from './puzzle1.ts?raw'
 
 let lines: string[]
 
-type TupleArray = [number, number][]
+type Range = { start: number; end: number }
+type RangeArray = Range[]
 
 export function answer() {
   lines = getLines(data)
@@ -15,35 +16,36 @@ export function answer() {
   try {
     const blankLineIndex = lines.findIndex((line) => line.trim() === '')
 
-    const freshRanges: TupleArray = lines
+    const freshRanges: RangeArray = lines
       .slice(0, blankLineIndex)
       .map((line) => line.split('-').map(Number))
       .filter((arr) => arr.length === 2)
-      .sort((a, b) => a[0] - b[0]) as TupleArray
+      .map((arr) => ({ start: arr[0], end: arr[1] }))
+      .sort((a, b) => a.start - b.start)
 
     // Rationalise the ranges
-    const rationalisedRanges: TupleArray = []
-    for (const [start, end] of freshRanges) {
+    const rationalisedRanges: RangeArray = []
+    for (const { start, end } of freshRanges) {
       // First entry
       if (rationalisedRanges.length === 0) {
-        rationalisedRanges.push([start, end])
+        rationalisedRanges.push({ start, end })
         continue
       }
 
       const prevRange = rationalisedRanges[rationalisedRanges.length - 1]
 
-      const [, prevEnd] = prevRange
+      const { end: prevEnd } = prevRange
       if (start <= prevEnd + 1) {
         // Ranges overlap or are contiguous, merge them
-        prevRange[1] = Math.max(prevEnd, end)
+        prevRange.end = Math.max(prevEnd, end)
       } else {
         // No overlap, add a new range
-        rationalisedRanges.push([start, end])
+        rationalisedRanges.push({ start, end })
       }
     }
 
     // Once we know that the ranges don't overlap, we can tally up the ingredient counts
-    rationalisedRanges.forEach(([start, end]) => {
+    rationalisedRanges.forEach(({ start, end }) => {
       total += end - start + 1
     })
   } catch (e: any) {
