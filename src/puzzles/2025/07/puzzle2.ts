@@ -8,7 +8,7 @@ import {
 } from '~/utils/gridUtils'
 import { log } from '~/utils/log'
 import data from './input.txt?raw'
-export { default } from './puzzle1.ts?raw'
+export { default } from './puzzle2.ts?raw'
 
 export let grid: Grid
 
@@ -27,7 +27,11 @@ function findNextNode(
     row++
     const nextCellDown = getGridCell(grid, [col, row])
     if (nextCellDown === undefined) {
-      return null
+      const node: BeamNode = {
+        coord: [col, row],
+        children: [],
+      }
+      return node
     }
     if (nextCellDown === '.') {
       continue
@@ -59,19 +63,25 @@ function findNextNode(
   return null
 }
 
-function countNodes(
+function countPaths(
   node: BeamNode | null,
-  visited = new Set<BeamNode>(),
+  memo = new Map<BeamNode, number>(),
 ): number {
-  if (!node || visited.has(node)) {
+  if (node === null) {
     return 0
   }
-  visited.add(node)
-  let count = 1 // Count this node
-  for (const child of node.children) {
-    count += countNodes(child, visited)
+  if (memo.has(node)) {
+    return memo.get(node)!
   }
-  return count
+  if (node.children.length === 0) {
+    return 1
+  }
+  let totalPaths = 0
+  for (const child of node.children) {
+    totalPaths += countPaths(child, memo)
+  }
+  memo.set(node, totalPaths)
+  return totalPaths
 }
 
 export function answer() {
@@ -86,7 +96,7 @@ export function answer() {
     }
     const nodeCache = new Map<string, BeamNode>()
     const tree = findNextNode(grid, startCoord, nodeCache)
-    total = countNodes(tree)
+    total = countPaths(tree)
   } catch (e: any) {
     log(`Error: ${e.message}`)
     log(`Stack Trace:\n${e.stack}`)
@@ -97,4 +107,4 @@ export function answer() {
 
 answer()
 
-export const confirmedAnswer = 1504
+export const confirmedAnswer = 5137133207830
