@@ -1,20 +1,113 @@
-import { getGrid, Grid, printGrid } from '~/utils/gridUtils'
-import { getLines, printLines } from '~/utils/lineUtils'
+import { Coord3D } from '~/utils/3dUtils'
+import { getLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
-import data from './sample.txt?raw'
+import data from './input.txt?raw'
 export { default } from './puzzle2.ts?raw'
 
-// let lines: string[]
-// export let grid: Grid
+let lines: string[]
+
+interface Edge {
+  u: number // Index of first box
+  v: number // Index of second box
+  distance: number
+  used?: boolean
+}
+
+interface Circuit {
+  id: number
+  nodes: Coord3D[]
+}
+
+function getDist(a: Coord3D, b: Coord3D): number {
+  return Math.sqrt(
+    Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2) + Math.pow(a.z - b.z, 2),
+  )
+}
+
+function mergeCircuits(
+  circuits: Circuit[],
+  nodeA: Coord3D,
+  nodeB: Coord3D,
+): boolean {
+  let circuitA: Circuit | null = null
+  let circuitB: Circuit | null = null
+
+  for (const circuit of circuits) {
+    if (circuit.nodes.includes(nodeA)) {
+      circuitA = circuit
+    }
+    if (circuit.nodes.includes(nodeB)) {
+      circuitB = circuit
+    }
+    if (circuitA && circuitB) {
+      break
+    }
+  }
+
+  if (circuitA && circuitB && circuitA !== circuitB) {
+    // Merge circuitB into circuitA
+    circuitA.nodes.push(...circuitB.nodes)
+    // Remove circuitB from circuits
+    const index = circuits.indexOf(circuitB)
+    if (index !== -1) {
+      circuits.splice(index, 1)
+    }
+    return true
+  } else {
+    return false
+  }
+}
 
 export function answer() {
-  // lines = getLines(data)
-  // grid = getGrid(data)
-
+  lines = getLines(data)
   let total = 0
+  const circuits: Circuit[] = []
 
   try {
-    // Get to it . . .
+    const nodes: Coord3D[] = lines.map((line) => {
+      const [xStr, yStr, zStr] = line.split(',')
+      return {
+        x: parseInt(xStr, 10),
+        y: parseInt(yStr, 10),
+        z: parseInt(zStr, 10),
+      }
+    })
+    // Initialize each node as its own circuit
+    nodes.forEach((node, index) => {
+      circuits.push({
+        id: index,
+        nodes: [node],
+      })
+    })
+
+    // Get all possible edges
+    const edges: Edge[] = []
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        edges.push({
+          u: i,
+          v: j,
+          distance: getDist(nodes[i], nodes[j]),
+        })
+      }
+    }
+
+    edges.sort((a, b) => a.distance - b.distance)
+
+    // Connect all nodes until we have a single circuit
+    while (circuits.length > 1) {
+      const nextClosestEdge = edges.find((edge) => !edge.used)
+      if (!nextClosestEdge) {
+        break
+      }
+      nextClosestEdge.used = true
+      const nodeA = nodes[nextClosestEdge.u]
+      const nodeB = nodes[nextClosestEdge.v]
+      mergeCircuits(circuits, nodeA, nodeB)
+      if (circuits.length === 1) {
+        total = nodeA.x * nodeB.x
+      }
+    }
   } catch (e: any) {
     log(`Error: ${e.message}`)
     log(`Stack Trace:\n${e.stack}`)
@@ -25,4 +118,4 @@ export function answer() {
 
 answer()
 
-// export const confirmedAnswer =
+export const confirmedAnswer = 8520040659

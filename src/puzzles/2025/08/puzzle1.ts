@@ -1,3 +1,4 @@
+import { Coord3D } from '~/utils/3dUtils'
 import { getLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
 import data from './input.txt?raw'
@@ -6,12 +7,6 @@ export { default } from './puzzle1.ts?raw'
 const CLOSEST_CONNECTIONS = 1000
 
 let lines: string[]
-
-interface Coord {
-  x: number
-  y: number
-  z: number
-}
 
 interface Edge {
   u: number // Index of first box
@@ -22,16 +17,20 @@ interface Edge {
 
 interface Circuit {
   id: number
-  nodes: Coord[]
+  nodes: Coord3D[]
 }
 
-function getDist(a: Coord, b: Coord): number {
+function getDist(a: Coord3D, b: Coord3D): number {
   return Math.sqrt(
     Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2) + Math.pow(a.z - b.z, 2),
   )
 }
 
-function mergeCircuits(circuits: Circuit[], nodeA: Coord, nodeB: Coord): void {
+function mergeCircuits(
+  circuits: Circuit[],
+  nodeA: Coord3D,
+  nodeB: Coord3D,
+): boolean {
   let circuitA: Circuit | null = null
   let circuitB: Circuit | null = null
 
@@ -55,14 +54,11 @@ function mergeCircuits(circuits: Circuit[], nodeA: Coord, nodeB: Coord): void {
     if (index !== -1) {
       circuits.splice(index, 1)
     }
+    return true
+  } else {
+    return false
   }
 }
-
-// function logPair(coord1: Coord, coord2: Coord) {
-//   log(
-//     `Pair: (${coord1.x},${coord1.y},${coord1.z}) <-> (${coord2.x},${coord2.y},${coord2.z})`,
-//   )
-// }
 
 export function answer() {
   lines = getLines(data)
@@ -71,7 +67,7 @@ export function answer() {
   const circuits: Circuit[] = []
 
   try {
-    const nodes: Coord[] = lines.map((line) => {
+    const nodes: Coord3D[] = lines.map((line) => {
       const [xStr, yStr, zStr] = line.split(',')
       return {
         x: parseInt(xStr, 10),
@@ -101,7 +97,7 @@ export function answer() {
 
     edges.sort((a, b) => a.distance - b.distance)
 
-    // Get the ten shortest connections
+    // Get the shortest connections
     while (connections < CLOSEST_CONNECTIONS) {
       const nextClosestEdge = edges.find((edge) => !edge.used)
       if (!nextClosestEdge) {
@@ -112,7 +108,6 @@ export function answer() {
       const nodeA = nodes[nextClosestEdge.u]
       const nodeB = nodes[nextClosestEdge.v]
       mergeCircuits(circuits, nodeA, nodeB)
-      // logPair(nodeA, nodeB)
     }
 
     const threeLongestCircuits = circuits
