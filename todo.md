@@ -9,5 +9,5 @@
 - [x] Allow toggling between code and visualisation
 - [x] Add a 3d space visualiser
 - [x] Add option to make grid visualisation fit to width
-- [ ] Make navigation for current month's puzzles easier
+- [x] Make navigation for current month's puzzles easier
 - [ ] .

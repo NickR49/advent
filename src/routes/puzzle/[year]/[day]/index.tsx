@@ -5,21 +5,23 @@ import Link from '~/components/Link'
 
 export default function Puzzle() {
   const params = useParams()
-  const day = params.day?.slice(0, 2)
+  const day = () => params.day?.slice(0, 2)
   const puzzle = () => (params.day?.slice(2, 3) === 'b' ? 2 : 1)
 
   return (
     <div>
-      <Title>{`${params.year} - Day ${Number(day)} Puzzle ${puzzle()}`}</Title>
+      <Title>{`${params.year} - Day ${Number(
+        day(),
+      )} Puzzle ${puzzle()}`}</Title>
       <main class='flex flex-col text-center mx-auto text-gray-700 py-4 gap-3'>
         <span class='flex gap-4 justify-center items-center'>
           <h1 class='max-6-xs text-3xl text-sky-700 font-thin'>
-            {params.year}-{day}
+            {params.year}-{day()}
           </h1>
-          <Link href={`../${day}a`} selected={puzzle() === 1}>
+          <Link href={`../${day()}a`} selected={puzzle() === 1}>
             Puzzle 1
           </Link>
-          <Link href={`../${day}b`} selected={puzzle() === 2}>
+          <Link href={`../${day()}b`} selected={puzzle() === 2}>
             Puzzle 2
           </Link>
         </span>

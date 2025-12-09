@@ -7,6 +7,7 @@ interface Props {
   selected?: boolean
   newTab?: boolean
   children?: any
+  onClick?: () => void
 }
 
 export default function Link(props: Props) {
@@ -15,6 +16,7 @@ export default function Link(props: Props) {
     <A
       target={props.newTab ? '_blank' : undefined}
       href={props.href}
+      onClick={props.onClick}
       class={cn(
         color,
         props.selected
