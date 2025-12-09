@@ -1,12 +1,14 @@
 import { createEffect, onCleanup } from 'solid-js'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { ConvexGeometry } from 'three/examples/jsm/geometries/ConvexGeometry.js'
 import type { Coord3D, Edge } from '~/utils/3dUtils'
 
 interface Props {
   nodes: Coord3D[]
   edges: Edge[]
   debug?: boolean
+  showSurfaces?: boolean
 }
 
 const Graph3D = (props: Props) => {
@@ -45,6 +47,7 @@ const Graph3D = (props: Props) => {
     const nodes = props.nodes
     const edges = props.edges
     const debug = props.debug
+    const showSurfaces = props.showSurfaces ?? false
 
     // Clean up previous scene
     cleanup()
@@ -199,6 +202,42 @@ const Graph3D = (props: Props) => {
         scene.add(line)
       }
     })
+
+    // Create convex hull surface from nodes if enabled
+    if (showSurfaces && nodes.length >= 4) {
+      const points = nodes.map(
+        (node) => new THREE.Vector3(node.x, node.y, node.z),
+      )
+
+      try {
+        const hullGeometry = new ConvexGeometry(points)
+        const hullMaterial = new THREE.MeshPhongMaterial({
+          color: 0x44aaff,
+          transparent: true,
+          opacity: 0.3,
+          side: THREE.DoubleSide,
+          depthWrite: false,
+        })
+        const hullMesh = new THREE.Mesh(hullGeometry, hullMaterial)
+        scene.add(hullMesh)
+
+        // Add wireframe for better visibility
+        const wireframeMaterial = new THREE.MeshBasicMaterial({
+          color: 0x88ccff,
+          wireframe: true,
+          transparent: true,
+          opacity: 0.5,
+        })
+        const wireframeMesh = new THREE.Mesh(hullGeometry, wireframeMaterial)
+        scene.add(wireframeMesh)
+
+        if (debug) {
+          console.log('Added convex hull surface')
+        }
+      } catch (e) {
+        console.warn('Could not create convex hull:', e)
+      }
+    }
 
     // Animation loop
     const currentRenderer = renderer

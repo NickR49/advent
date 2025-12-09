@@ -21,6 +21,7 @@ const DynamicImportComponent = () => {
   const [nodes, setNodes] = createSignal<Coord3D[]>()
   const [edges, setEdges] = createSignal<Edge[]>()
   const [tab, setTab] = createSignal<'code' | 'visualisation'>('code')
+  const [showSurfaces, setShowSurfaces] = createSignal(false)
   const puzzle = () => (params.day?.slice(2, 3) === 'b' ? 2 : 1)
 
   const hasVisualisation = () => {
@@ -106,7 +107,22 @@ const DynamicImportComponent = () => {
       </Show>
       <Show when={nodes() && edges() && tab() === 'visualisation'}>
         <div class='w-full px-6'>
-          <Graph3D nodes={nodes()!} edges={edges()!} debug />
+          <div class='flex gap-4 mb-2'>
+            <label class='flex items-center gap-2 cursor-pointer'>
+              <input
+                type='checkbox'
+                checked={showSurfaces()}
+                onChange={(e) => setShowSurfaces(e.currentTarget.checked)}
+                class='w-4 h-4'
+              />
+              <span class='text-sm'>Show surfaces</span>
+            </label>
+          </div>
+          <Graph3D
+            nodes={nodes()!}
+            edges={edges()!}
+            showSurfaces={showSurfaces()}
+          />
         </div>
       </Show>
     </div>
