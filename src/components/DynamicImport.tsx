@@ -16,6 +16,7 @@ const DynamicImportComponent = () => {
   const [confirmedAnswer, setConfirmedAnswer] = createSignal<number>()
   const [codeHtml, setCodeHtml] = createSignal<string>()
   const [grid, setGrid] = createSignal<Grid>()
+  const [tab, setTab] = createSignal<'code' | 'visualisation'>('code')
   const puzzle = () => (params.day?.slice(2, 3) === 'b' ? 2 : 1)
 
   createEffect(async () => {
@@ -66,9 +67,27 @@ const DynamicImportComponent = () => {
 
   return (
     <div class='flex flex-col gap-2 items-center'>
-      <Result result={answer()} confirmedResult={confirmedAnswer()} />
-      {codeHtml() && <CodeBlock code={codeHtml()} />}
-      <Show when={grid()}>
+      <div class='flex space-between w-full px-6'>
+        <div class='flex w-full gap-4'>
+          <button
+            onClick={() => setTab('code')}
+            class={tab() === 'code' ? 'font-bold text-blue-500' : ''}
+          >
+            Code
+          </button>
+          {grid() && (
+            <button
+              onClick={() => setTab('visualisation')}
+              class={tab() === 'visualisation' ? 'font-bold text-blue-500' : ''}
+            >
+              Visualisation
+            </button>
+          )}
+        </div>
+        <Result result={answer()} confirmedResult={confirmedAnswer()} />
+      </div>
+      {codeHtml() && tab() === 'code' && <CodeBlock code={codeHtml()} />}
+      <Show when={grid() && tab() === 'visualisation'}>
         <div class='w-dvw overflow-x-scroll'>
           <FlexboxGrid grid={grid()!} />
         </div>

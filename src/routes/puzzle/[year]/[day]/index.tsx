@@ -11,8 +11,8 @@ export default function Puzzle() {
   return (
     <div>
       <Title>{`${params.year} - Day ${Number(day)} Puzzle ${puzzle()}`}</Title>
-      <main class='flex flex-col text-center mx-auto text-gray-700 py-4 gap-8'>
-        <span class='flex gap-4 justify-center items-baseline'>
+      <main class='flex flex-col text-center mx-auto text-gray-700 py-4 gap-3'>
+        <span class='flex gap-4 justify-center items-center'>
           <h1 class='max-6-xs text-3xl text-sky-700 font-thin'>
             {params.year}-{day}
           </h1>
