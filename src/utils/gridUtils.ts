@@ -7,6 +7,16 @@ export interface Grid {
   marked?: boolean[][]
 }
 
+export function createEmptyGrid(width: number, height: number): Grid {
+  const cells: string[][] = []
+  const marked: boolean[][] = []
+  for (let i = 0; i < height; i++) {
+    cells.push(Array(width).fill('.'))
+    marked.push(Array(width).fill(false))
+  }
+  return { width, height, cells, marked }
+}
+
 export function getGrid(text: string): Grid {
   const data = getLines(text).map((line) => line.split(''))
   const width = data[0].length

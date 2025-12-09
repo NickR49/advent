@@ -115,7 +115,7 @@ const DynamicImportComponent = () => {
             </label>
           </div>
         </div>
-        <div class={fitToWidth() ? 'w-full px-6' : 'w-dvw overflow-x-scroll'}>
+        <div class={fitToWidth() ? 'w-full px-6' : 'w-dvw overflow-x-auto'}>
           <FlexboxGrid grid={grid()!} fitToWidth={fitToWidth()} />
         </div>
       </Show>
