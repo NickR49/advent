@@ -1,10 +1,12 @@
 import { useParams } from '@solidjs/router'
 import { codeToHtml } from 'shiki'
 import { createEffect, createSignal, Show } from 'solid-js'
+import { Coord3D, Edge } from '~/utils/3dUtils'
 import { Grid } from '~/utils/gridUtils'
 import { log } from '~/utils/log'
 import CodeBlock from './CodeBlock'
 import FlexboxGrid from './FlexboxGrid'
+import Graph3D from './Graph3D'
 import Result from './Result'
 
 const puzzles = import.meta.glob('../puzzles/*/*/puzzle*.ts')
@@ -16,8 +18,14 @@ const DynamicImportComponent = () => {
   const [confirmedAnswer, setConfirmedAnswer] = createSignal<number>()
   const [codeHtml, setCodeHtml] = createSignal<string>()
   const [grid, setGrid] = createSignal<Grid>()
+  const [nodes, setNodes] = createSignal<Coord3D[]>()
+  const [edges, setEdges] = createSignal<Edge[]>()
   const [tab, setTab] = createSignal<'code' | 'visualisation'>('code')
   const puzzle = () => (params.day?.slice(2, 3) === 'b' ? 2 : 1)
+
+  const hasVisualisation = () => {
+    return grid() || (nodes() && edges())
+  }
 
   createEffect(async () => {
     const year = params.year
@@ -51,6 +59,10 @@ const DynamicImportComponent = () => {
             setConfirmedAnswer(confirmedAnswer)
             const grid = module.grid
             setGrid(grid)
+            const nodes = module.nodes
+            setNodes(nodes)
+            const edges = module.edges
+            setEdges(edges)
           } else {
             // console.error('The module does not export an answer function.')
           }
@@ -75,7 +87,7 @@ const DynamicImportComponent = () => {
           >
             Code
           </button>
-          {grid() && (
+          {hasVisualisation() && (
             <button
               onClick={() => setTab('visualisation')}
               class={tab() === 'visualisation' ? 'font-bold text-blue-500' : ''}
@@ -90,6 +102,11 @@ const DynamicImportComponent = () => {
       <Show when={grid() && tab() === 'visualisation'}>
         <div class='w-dvw overflow-x-scroll'>
           <FlexboxGrid grid={grid()!} />
+        </div>
+      </Show>
+      <Show when={nodes() && edges() && tab() === 'visualisation'}>
+        <div class='w-full px-6'>
+          <Graph3D nodes={nodes()!} edges={edges()!} debug />
         </div>
       </Show>
     </div>

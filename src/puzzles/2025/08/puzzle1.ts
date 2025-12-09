@@ -1,19 +1,15 @@
-import { Coord3D } from '~/utils/3dUtils'
+import { Coord3D, Edge } from '~/utils/3dUtils'
 import { getLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
 import data from './input.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
+export let nodes: Coord3D[] = []
+export let edges: Edge[] = []
+
 const CLOSEST_CONNECTIONS = 1000
 
 let lines: string[]
-
-interface Edge {
-  u: number // Index of first box
-  v: number // Index of second box
-  distance: number
-  used?: boolean
-}
 
 interface Circuit {
   id: number
@@ -67,7 +63,7 @@ export function answer() {
   const circuits: Circuit[] = []
 
   try {
-    const nodes: Coord3D[] = lines.map((line) => {
+    nodes = lines.map((line) => {
       const [xStr, yStr, zStr] = line.split(',')
       return {
         x: parseInt(xStr, 10),
@@ -84,7 +80,7 @@ export function answer() {
     })
 
     // Get all possible edges
-    const edges: Edge[] = []
+    edges = []
     for (let i = 0; i < nodes.length; i++) {
       for (let j = i + 1; j < nodes.length; j++) {
         edges.push({

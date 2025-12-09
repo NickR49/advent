@@ -7,7 +7,7 @@
 - [x] Add GitHub Action to run puzzles on push
 - [x] Externalise puzzle run timing
 - [x] Allow toggling between code and visualisation
-- [ ] Add a 3d space visualiser
-- [ ] Add toggle for visualisation scale
+- [x] Add a 3d space visualiser
+- [ ] Add toggle for grid visualisation scale
 - [ ] Make navigation for current month's puzzles easier
 - [ ] .
