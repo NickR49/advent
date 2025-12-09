@@ -94,7 +94,7 @@ const DynamicImportComponent = () => {
               onClick={() => setTab('visualisation')}
               class={tab() === 'visualisation' ? 'font-bold text-blue-500' : ''}
             >
-              Visualisation
+              {grid() ? 'Grid' : '3D'}
             </button>
           )}
         </div>
