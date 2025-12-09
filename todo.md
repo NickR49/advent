@@ -8,6 +8,6 @@
 - [x] Externalise puzzle run timing
 - [x] Allow toggling between code and visualisation
 - [x] Add a 3d space visualiser
-- [ ] Add toggle for grid visualisation scale
+- [x] Add option to make grid visualisation fit to width
 - [ ] Make navigation for current month's puzzles easier
 - [ ] .

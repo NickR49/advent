@@ -22,6 +22,7 @@ const DynamicImportComponent = () => {
   const [edges, setEdges] = createSignal<Edge[]>()
   const [tab, setTab] = createSignal<'code' | 'visualisation'>('code')
   const [showSurfaces, setShowSurfaces] = createSignal(false)
+  const [fitToWidth, setFitToWidth] = createSignal(false)
   const puzzle = () => (params.day?.slice(2, 3) === 'b' ? 2 : 1)
 
   const hasVisualisation = () => {
@@ -101,8 +102,21 @@ const DynamicImportComponent = () => {
       </div>
       {codeHtml() && tab() === 'code' && <CodeBlock code={codeHtml()} />}
       <Show when={grid() && tab() === 'visualisation'}>
-        <div class='w-dvw overflow-x-scroll'>
-          <FlexboxGrid grid={grid()!} />
+        <div class='w-full px-6'>
+          <div class='flex gap-4 mb-2'>
+            <label class='flex items-center gap-2 cursor-pointer'>
+              <input
+                type='checkbox'
+                checked={fitToWidth()}
+                onChange={(e) => setFitToWidth(e.currentTarget.checked)}
+                class='w-4 h-4'
+              />
+              <span class='text-sm'>Fit to width</span>
+            </label>
+          </div>
+        </div>
+        <div class={fitToWidth() ? 'w-full px-6' : 'w-dvw overflow-x-scroll'}>
+          <FlexboxGrid grid={grid()!} fitToWidth={fitToWidth()} />
         </div>
       </Show>
       <Show when={nodes() && edges() && tab() === 'visualisation'}>
