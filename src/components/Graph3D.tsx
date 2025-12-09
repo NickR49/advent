@@ -1,4 +1,4 @@
-import { onCleanup, onMount } from 'solid-js'
+import { createEffect, onCleanup } from 'solid-js'
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import type { Coord3D, Edge } from '~/utils/3dUtils'
@@ -11,21 +11,57 @@ interface Props {
 
 const Graph3D = (props: Props) => {
   let containerRef: HTMLDivElement | undefined
+  let renderer: THREE.WebGLRenderer | undefined
+  let animationId: number | undefined
+  let controls: OrbitControls | undefined
+  let resizeHandler: (() => void) | undefined
 
-  onMount(() => {
+  // Cleanup function to dispose of Three.js resources
+  const cleanup = () => {
+    if (animationId !== undefined) {
+      cancelAnimationFrame(animationId)
+      animationId = undefined
+    }
+    if (resizeHandler) {
+      window.removeEventListener('resize', resizeHandler)
+      resizeHandler = undefined
+    }
+    if (controls) {
+      controls.dispose()
+      controls = undefined
+    }
+    if (renderer) {
+      renderer.dispose()
+      if (containerRef && renderer.domElement.parentNode === containerRef) {
+        containerRef.removeChild(renderer.domElement)
+      }
+      renderer = undefined
+    }
+  }
+
+  // Use createEffect to react to prop changes
+  createEffect(() => {
+    // Access props to create dependency tracking
+    const nodes = props.nodes
+    const edges = props.edges
+    const debug = props.debug
+
+    // Clean up previous scene
+    cleanup()
+
     if (!containerRef) return
 
-    if (props.debug) {
+    if (debug) {
       console.log(
         'Graph3D received nodes:',
-        props.nodes?.length,
+        nodes?.length,
         'edges:',
-        props.edges?.length,
+        edges?.length,
       )
     }
 
     // Handle empty data
-    if (!props.nodes || props.nodes.length === 0) {
+    if (!nodes || nodes.length === 0) {
       console.warn('Graph3D: No nodes to render')
       return
     }
@@ -41,13 +77,13 @@ const Graph3D = (props: Props) => {
     const camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000000)
 
     // Create renderer
-    const renderer = new THREE.WebGLRenderer({ antialias: true })
+    renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setSize(width, height)
     renderer.setPixelRatio(window.devicePixelRatio)
     containerRef.appendChild(renderer.domElement)
 
     // Add orbit controls for rotation and zoom
-    const controls = new OrbitControls(camera, renderer.domElement)
+    controls = new OrbitControls(camera, renderer.domElement)
     controls.enableDamping = true
     controls.dampingFactor = 0.05
     controls.enableZoom = true
@@ -63,7 +99,7 @@ const Graph3D = (props: Props) => {
       maxZ: -Infinity,
     }
 
-    props.nodes.forEach((node) => {
+    nodes.forEach((node) => {
       bounds.minX = Math.min(bounds.minX, node.x)
       bounds.maxX = Math.max(bounds.maxX, node.x)
       bounds.minY = Math.min(bounds.minY, node.y)
@@ -126,20 +162,20 @@ const Graph3D = (props: Props) => {
     const nodeGeometry = new THREE.SphereGeometry(nodeRadius, 16, 16)
     const nodeMaterial = new THREE.MeshPhongMaterial({ color: 0x4fc3f7 })
 
-    props.nodes.forEach((node) => {
+    nodes.forEach((node) => {
       const mesh = new THREE.Mesh(nodeGeometry, nodeMaterial)
       mesh.position.set(node.x, node.y, node.z)
       scene.add(mesh)
     })
 
     // Create edges as lines - only render "used" edges to avoid overwhelming the scene
-    const usedEdges = props.edges.filter((e) => e.used)
-    if (props.debug) {
+    const usedEdges = edges.filter((e) => e.used)
+    if (debug) {
       console.log(
         'Rendering',
         usedEdges.length,
         'used edges out of',
-        props.edges.length,
+        edges.length,
         'total',
       )
     }
@@ -150,8 +186,8 @@ const Graph3D = (props: Props) => {
     })
 
     usedEdges.forEach((edge) => {
-      const startNode = props.nodes[edge.u]
-      const endNode = props.nodes[edge.v]
+      const startNode = nodes[edge.u]
+      const endNode = nodes[edge.v]
 
       if (startNode && endNode) {
         const points = [
@@ -165,38 +201,31 @@ const Graph3D = (props: Props) => {
     })
 
     // Animation loop
-    let animationId: number
+    const currentRenderer = renderer
+    const currentControls = controls
 
     const animate = () => {
       animationId = requestAnimationFrame(animate)
-      controls.update()
-      renderer.render(scene, camera)
+      currentControls.update()
+      currentRenderer.render(scene, camera)
     }
 
     animate()
 
     // Handle resize
-    const handleResize = () => {
-      if (!containerRef) return
+    resizeHandler = () => {
+      if (!containerRef || !currentRenderer) return
       const newWidth = containerRef.clientWidth
       camera.aspect = newWidth / height
       camera.updateProjectionMatrix()
-      renderer.setSize(newWidth, height)
+      currentRenderer.setSize(newWidth, height)
     }
 
-    window.addEventListener('resize', handleResize)
-
-    // Cleanup
-    onCleanup(() => {
-      cancelAnimationFrame(animationId)
-      window.removeEventListener('resize', handleResize)
-      controls.dispose()
-      renderer.dispose()
-      if (containerRef && renderer.domElement.parentNode === containerRef) {
-        containerRef.removeChild(renderer.domElement)
-      }
-    })
+    window.addEventListener('resize', resizeHandler)
   })
+
+  // Cleanup on unmount
+  onCleanup(cleanup)
 
   return (
     <div
