@@ -34,10 +34,16 @@ Run the update
 bun update
 ```
 
-Run the puzzles
+Run one puzzle
 
 ```bash
-bun scripts/check-puzzles.ts
+bun puzzle 2025-10b
+```
+
+Run all puzzles
+
+```bash
+bun puzzles
 ```
 
 ## Building

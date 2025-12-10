@@ -5,6 +5,8 @@
     "dev": "vinxi dev",
     "build": "vinxi build",
     "start": "vinxi start",
+    "puzzle": "bun ./scripts/run-puzzle.ts",
+    "puzzles": "bun ./scripts/check-puzzles.ts",
     "update": "taze --interactive --recursive --install --timediff false"
   },
   "dependencies": {
