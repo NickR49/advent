@@ -1,5 +1,5 @@
-import { Coord, createEmptyGrid, getGrid, Grid } from '~/utils/gridUtils'
-import { getLines, printLines } from '~/utils/lineUtils'
+import { Coord, Grid } from '~/utils/gridUtils'
+import { getLines } from '~/utils/lineUtils'
 
 import { log } from '~/utils/log'
 import data from './input.txt?raw'
@@ -17,7 +17,6 @@ export function answer() {
       const [x, y] = line.split(',').map(Number)
       return [x, y]
     })
-    log(`coords: ${JSON.stringify(coords)}`)
 
     // Go through all combinations of two tile coordinates to see which forms the largest rectangle
     for (let i = 0; i < coords.length; i++) {
@@ -30,7 +29,6 @@ export function answer() {
         if (area > total) {
           total = area
         }
-        log(`Rectangle: ${width} x ${height} = ${area}`)
       }
     }
   } catch (e: any) {
