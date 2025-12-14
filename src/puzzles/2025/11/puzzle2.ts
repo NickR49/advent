@@ -10,6 +10,8 @@ interface Connections {
   outputDevices: string[]
 }
 
+const requiredDevices = ['dac', 'fft']
+
 // Find all paths from device 'you' to device 'out'
 function findPaths(
   graph: Record<string, string[]>,
@@ -18,6 +20,9 @@ function findPaths(
   visited: Set<string>,
 ): number {
   if (currentDevice === terminalDevice) {
+    if (!requiredDevices.every((device) => visited.has(device))) {
+      return 0 // Not all required devices have been visited
+    }
     return 1 // Found a valid path
   }
 
@@ -54,7 +59,7 @@ export function answer() {
       graph[inputDevice] = outputDevices
     })
 
-    total = findPaths(graph, 'you', 'out', new Set())
+    total = findPaths(graph, 'svr', 'out', new Set())
   } catch (e: any) {
     log(`Error: ${e.message}`)
     log(`Stack Trace:\n${e.stack}`)
@@ -65,4 +70,4 @@ export function answer() {
 
 answer()
 
-export const confirmedAnswer = 758
+// export const confirmedAnswer =
