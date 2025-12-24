@@ -16,7 +16,7 @@ function hasAdjacentSymbol(allLines: string[], num: SchematicNumber): boolean {
     const lineAbove = allLines[num.y - 1]
     const stringAbove = lineAbove.substring(
       num.x - 1,
-      num.x + String(num.value).length + 1,
+      num.x + String(num.value).length + 1
     )
     if (symbolRegex.test(stringAbove)) {
       return true
@@ -27,7 +27,7 @@ function hasAdjacentSymbol(allLines: string[], num: SchematicNumber): boolean {
     const lineBelow = allLines[num.y + 1]
     const stringBelow = lineBelow.substring(
       num.x - 1,
-      num.x + String(num.value).length + 1,
+      num.x + String(num.value).length + 1
     )
 
     if (symbolRegex.test(stringBelow)) {
@@ -53,7 +53,7 @@ function hasAdjacentSymbol(allLines: string[], num: SchematicNumber): boolean {
   return false
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
   const numbers: SchematicNumber[] = []
 

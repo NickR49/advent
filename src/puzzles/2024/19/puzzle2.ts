@@ -1,4 +1,5 @@
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
 export { default } from './puzzle2.ts?raw'
 
@@ -7,7 +8,7 @@ const towelsToMake = data.split('\n\n')[1].split('\n')
 
 const findPatternCombinations = (
   towelToMake: string,
-  patterns: string[],
+  patterns: string[]
 ): number => {
   const dp: number[] = new Array(towelToMake.length + 1).fill(0)
   dp[0] = 1 // Empty string gets a free pass
@@ -27,7 +28,7 @@ const findPatternCombinations = (
   return dp[towelToMake.length]
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
 
   try {

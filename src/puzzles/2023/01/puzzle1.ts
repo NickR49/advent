@@ -5,7 +5,7 @@ function reverseString(str: string): string {
   return str.split('').reverse().join('')
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
 
   data.split('\n').forEach((line) => {

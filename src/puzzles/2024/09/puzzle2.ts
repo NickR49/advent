@@ -23,7 +23,7 @@ function convertLine(input: string): Entry[] {
 
 function findFile(
   input: Entry[],
-  fileId: number,
+  fileId: number
 ): [position: number, size: number] {
   const pos = input.findIndex((entry) => entry === fileId)
   const size = input.filter((entry) => entry === fileId).length
@@ -51,7 +51,7 @@ function findFirstGap(input: Entry[], size: number): number {
 
 function printFileSystem(input: Entry[]) {
   console.log(
-    input.map((entry) => (entry === undefined ? '.' : `${entry}`)).join(''),
+    input.map((entry) => (entry === undefined ? '.' : `${entry}`)).join('')
   )
 }
 
@@ -89,7 +89,7 @@ function calcChecksum(input: Entry[]): number {
   return total
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
 
   try {

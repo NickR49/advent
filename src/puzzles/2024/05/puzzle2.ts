@@ -1,5 +1,7 @@
 import { isEqual } from 'lodash'
+
 import { getLines } from '~/utils/lineUtils'
+
 import data from './input.txt?raw'
 export { default } from './puzzle2.ts?raw'
 
@@ -10,7 +12,7 @@ interface PageOrderingRule {
 
 type Update = number[]
 
-export function answer() {
+export function answer(): number {
   let total = 0
 
   try {
@@ -32,7 +34,7 @@ export function answer() {
       // Get all relevant page ordering rules
       const rules = pageOrderingRules.filter(
         (rule) =>
-          pageUpdate.includes(rule.first) && pageUpdate.includes(rule.second),
+          pageUpdate.includes(rule.first) && pageUpdate.includes(rule.second)
       )
 
       // Establish order - using the assumption that the number of times a number occurs in the first position indicates its position

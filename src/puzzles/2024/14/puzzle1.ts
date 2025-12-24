@@ -7,6 +7,7 @@ import {
 } from '~/utils/gridUtils'
 import { getLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
@@ -56,7 +57,7 @@ function moveRobots(robots: Robot[]): Robot[] {
   })
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
 
   try {

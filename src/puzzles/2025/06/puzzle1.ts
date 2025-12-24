@@ -1,5 +1,6 @@
 import { getLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
@@ -12,7 +13,7 @@ interface Equation {
 
 type Operator = '+' | '*'
 
-export function answer() {
+export function answer(): number {
   lines = getLines(data)
 
   let total = 0

@@ -1,5 +1,6 @@
 import { getGrid, getGridCell, Grid } from '~/utils/gridUtils'
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
@@ -64,7 +65,7 @@ function dijkstra(
   graph: Graph,
   startNode: string,
   endNode: string,
-  startingDirection: Direction,
+  startingDirection: Direction
 ): { path: string[]; score: number } {
   const costs: Record<string, number> = {}
   const previous: Record<string, string | null> = {}
@@ -118,7 +119,7 @@ function dijkstra(
   return { path: path.reverse(), score: costs[endNode] }
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
 
   try {

@@ -1,4 +1,5 @@
 import { cloneDeep } from 'lodash'
+
 import {
   Coord,
   getGrid,
@@ -9,6 +10,7 @@ import {
   setGridCell,
 } from '~/utils/gridUtils'
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
@@ -47,7 +49,7 @@ function findNodes(char: string, count: number): Coord[] {
 
 function calcAntinode(
   [coord1X, coord1Y]: Coord,
-  [coord2X, coord2Y]: Coord,
+  [coord2X, coord2Y]: Coord
 ): Coord {
   const xDist = coord1X - coord2X
   const yDist = coord1Y - coord2Y
@@ -85,7 +87,7 @@ function findAntinodes(coords: Coord[]) {
   // printGrid(gridCopy)
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
 
   try {

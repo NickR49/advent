@@ -1,5 +1,6 @@
 import { getLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
 export { default } from './puzzle2.ts?raw'
 
@@ -8,7 +9,7 @@ const lines = getLines(data)
 function highestNumber(
   batteries: number[],
   startPosition: number,
-  endPosition: number,
+  endPosition: number
 ): [position: number, number: number] {
   const subSection = batteries.slice(startPosition, endPosition)
   const max = Math.max(...subSection)
@@ -23,7 +24,7 @@ function largestJolt(bank: number[], digits: number): number {
     const [pos, num] = highestNumber(
       bank,
       position,
-      bank.length - (magnitude - 1),
+      bank.length - (magnitude - 1)
     )
     total += num * 10 ** (magnitude - 1)
     position = pos + 1
@@ -31,7 +32,7 @@ function largestJolt(bank: number[], digits: number): number {
   return total
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
 
   try {

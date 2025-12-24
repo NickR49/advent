@@ -1,4 +1,3 @@
-import { c } from 'vinxi/dist/types/lib/logger'
 import {
   Coord,
   Direction,
@@ -8,6 +7,7 @@ import {
 } from '~/utils/gridUtils'
 import { getLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
 export { default } from './puzzle2.ts?raw'
 
@@ -85,7 +85,7 @@ function checkPositionCounts(grid: Grid): boolean {
   return true
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
 
   try {

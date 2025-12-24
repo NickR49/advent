@@ -1,4 +1,5 @@
 import { cloneDeep } from 'lodash'
+
 import {
   Coord,
   Direction,
@@ -6,6 +7,7 @@ import {
   getGridCell,
   setGridCell,
 } from '~/utils/gridUtils'
+
 import data from './input.txt?raw'
 export { default } from './puzzle2.ts?raw'
 
@@ -56,7 +58,7 @@ function findNextFreeObstacleLocation(currLoc: Coord): Coord {
 
 function moveGuard(
   guardLoc: Coord,
-  direction: Direction,
+  direction: Direction
 ): [Coord | undefined, Direction] {
   const [guardX, guardY] = guardLoc
   // Check if there is an obstacle
@@ -103,7 +105,7 @@ function isCoordEqual(coord1: Coord | undefined, coord2: Coord | undefined) {
 //  [3,8]
 //  [7,9]
 
-export function answer() {
+export function answer(): number {
   let total = 0
   let actualLoopCount = 0
   let assumedLoopCount = 0

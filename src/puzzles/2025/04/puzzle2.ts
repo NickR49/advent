@@ -9,6 +9,7 @@ import {
   markGridCell,
 } from '~/utils/gridUtils'
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
 export { default } from './puzzle2.ts?raw'
 
@@ -26,7 +27,7 @@ function adjacentCellsCount(coord: Coord): number {
   return count
 }
 
-export function answer() {
+export function answer(): number {
   grid = getGrid(data)
 
   let total = 0

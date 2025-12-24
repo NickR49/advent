@@ -1,4 +1,5 @@
 import { Coord, eightDirections, getGrid, getGridCell } from '~/utils/gridUtils'
+
 import data from './input.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
@@ -23,7 +24,7 @@ function checkWord([x, y]: Coord): number {
   return wordMatches
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
   try {
     for (let y = 0; y <= grid.height; y++) {

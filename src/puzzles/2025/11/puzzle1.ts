@@ -1,5 +1,6 @@
 import { getLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
@@ -15,7 +16,7 @@ function findPaths(
   graph: Record<string, string[]>,
   currentDevice: string,
   terminalDevice: string,
-  visited: Set<string>,
+  visited: Set<string>
 ): number {
   if (currentDevice === terminalDevice) {
     return 1 // Found a valid path
@@ -36,7 +37,7 @@ function findPaths(
   return pathCount
 }
 
-export function answer() {
+export function answer(): number {
   lines = getLines(data)
 
   let total = 0

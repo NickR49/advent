@@ -9,6 +9,7 @@ import {
   printGrid,
 } from '~/utils/gridUtils'
 import { log } from '~/utils/log'
+
 import data from './sample.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
@@ -28,7 +29,7 @@ printGrid(dirPadGrid)
 function movesToChar(
   pad: Grid,
   pos: Coord,
-  char: string,
+  char: string
 ): { moves: string; pos: Coord } {
   let moves = ''
   let currPos: Coord = [...pos]
@@ -70,7 +71,7 @@ function movesToChar(
 // Direction pad to numpad
 function dpToNp(
   numPad: string,
-  startPos: Coord,
+  startPos: Coord
 ): { moves: string; pos: Coord } {
   let currPos: Coord = [...startPos]
   let allMoves = ''
@@ -85,7 +86,7 @@ function dpToNp(
 // Direction page to direction pad
 function dpToDp(
   dirPad: string,
-  startPos: Coord,
+  startPos: Coord
 ): { moves: string; pos: Coord } {
   let currPos: Coord = [...startPos]
   let allMoves = ''
@@ -97,7 +98,7 @@ function dpToDp(
   return { moves: allMoves, pos: currPos }
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
 
   try {

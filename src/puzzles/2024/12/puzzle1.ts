@@ -8,6 +8,7 @@ import {
   markGridCell,
 } from '~/utils/gridUtils'
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
@@ -44,7 +45,7 @@ function processRegion(char: string, [x, y]: Coord): [number, number] {
   return [area, edges]
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
   grid = getGrid(data)
 

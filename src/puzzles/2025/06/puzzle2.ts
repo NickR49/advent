@@ -1,5 +1,6 @@
 import { getGrid, getGridCell, Grid } from '~/utils/gridUtils'
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
 export { default } from './puzzle2.ts?raw'
 
@@ -12,7 +13,7 @@ interface Equation {
 
 type Operator = '+' | '*'
 
-export function answer() {
+export function answer(): number {
   grid = getGrid(data)
 
   let total = 0

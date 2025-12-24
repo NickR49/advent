@@ -1,7 +1,8 @@
 import { getLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
-export { default } from './puzzle1.ts?raw'
+export { default } from './puzzle1?raw'
 
 let lines: string[]
 
@@ -29,7 +30,7 @@ function parseMachine(line: string): Machine {
   if (!buttonWiringMatch || buttonWiringMatch.length < 1)
     throw new Error(`Invalid machine line (buttons): ${line}`)
   const buttonGroups = buttonWiringMatch.map((match) =>
-    match.slice(1, -1).split(',').map(Number),
+    match.slice(1, -1).split(',').map(Number)
   )
 
   // Joltage
@@ -47,7 +48,7 @@ function parseMachine(line: string): Machine {
 
 function pressLightsButton(
   buttonGroup: ButtonGroup,
-  currentPattern: string,
+  currentPattern: string
 ): string {
   // Toggle the lights at the indices specified in the button group
   let newPattern = currentPattern.split('')
@@ -96,7 +97,7 @@ function findFewestButtonPresses(machine: Machine): number {
   return -1 // Not possible
 }
 
-export function answer() {
+export function answer(): number {
   lines = getLines(data)
   let total = 0
 

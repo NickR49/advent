@@ -1,8 +1,9 @@
 import { getLines } from '~/utils/lineUtils'
+
 import data from './input.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
-export function answer() {
+export function answer(): number {
   let total = 0
 
   // Extract the two lists

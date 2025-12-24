@@ -21,14 +21,14 @@ function blink(inputNumbers: Map<number, number>): Map<number, number> {
     } else {
       outputNumbers.set(
         number * 2024,
-        (outputNumbers.get(number * 2024) || 0) + count,
+        (outputNumbers.get(number * 2024) || 0) + count
       )
     }
   })
   return outputNumbers
 }
 
-export function answer() {
+export function answer(): number {
   // let line = '125 17' // sample
   let line = '8069 87014 98 809367 525 0 9494914 5'
   let numbers = line.split(' ').map(Number)

@@ -1,8 +1,9 @@
 import { getLines } from '~/utils/lineUtils'
+
 import data from './input.txt?raw'
 export { default } from './puzzle2.ts?raw'
 
-export function answer() {
+export function answer(): number {
   // Extract the two lists
   const list1 = getLines(data)
     .map((line) => parseInt(line.split(/\s+/)[0]))

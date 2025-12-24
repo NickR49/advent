@@ -1,0 +1,59 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "plugins": [
+    "react",
+    "typescript",
+    "import",
+    "jest",
+    "jsdoc",
+    "jsx-a11y",
+    "promise",
+    "unicorn",
+    "vitest",
+    "oxc"
+  ],
+  "jsPlugins": [],
+  "categories": {
+    "correctness": "warn",
+    "style": "off",
+    "nursery": "off",
+    "pedantic": "off",
+    "suspicious": "warn",
+    "perf": "warn",
+    "restriction": "warn"
+  },
+  "env": {
+    "browser": true
+  },
+  "settings": {},
+  "rules": {
+    "@typescript-eslint/explicit-function-return-type": "allow",
+    "@typescript-eslint/no-explicit-any": "warn",
+    "eslint/no-alert": "off",
+    "eslint/no-console": "off",
+    "eslint/no-undefined": "off",
+    "import/no-cycle": "error",
+    "import/no-default-export": "off",
+    "import/no-unassigned-import": "off",
+    "oxc/no-async-await": "off",
+    "oxc/no-optional-chaining": "off",
+    "no-rest-spread-properties": "off",
+    "react/button-has-type": "off",
+    "react/exhaustive-deps": "warn",
+    "react/jsx-filename-extension": "off",
+    "react/no-children-prop": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/rules-of-hooks": "error",
+    "unicorn/no-array-for-each": "off",
+    "unicorn/prefer-add-event-listener": "off",
+    "no-self-import": "off",
+    "no-plusplus": "off",
+
+    // Add TanStack Query rules
+    "tanstack-query/exhaustive-deps": "error",
+    "tanstack-query/stable-query-client": "error",
+
+    // Add TanStack Router rules
+    "tanstack-router/create-route-property-order": "error"
+  }
+}

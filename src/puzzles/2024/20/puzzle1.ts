@@ -1,4 +1,5 @@
 import { cloneDeep } from 'lodash'
+
 import { createGraphFromMaze, dijkstra } from '~/utils/dijkstra'
 import {
   Coord,
@@ -9,6 +10,7 @@ import {
   setGridCell,
 } from '~/utils/gridUtils'
 import { log } from '~/utils/log'
+
 import data from './sample.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
@@ -40,7 +42,7 @@ function getCheatBlocks(grid: Grid): Coord[] {
 }
 
 // TODO Optimise this brute force solution
-export function answer() {
+export function answer(): number {
   let total = 0
 
   try {

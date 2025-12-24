@@ -7,6 +7,7 @@ import {
   markGridCell,
 } from '~/utils/gridUtils'
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
 export { default } from './puzzle2.ts?raw'
 
@@ -20,7 +21,7 @@ interface BeamNode {
 function findNextNode(
   grid: Grid,
   startCoord: Coord,
-  nodeCache: Map<string, BeamNode>,
+  nodeCache: Map<string, BeamNode>
 ): BeamNode | null {
   let [col, row] = startCoord
   while (true) {
@@ -65,7 +66,7 @@ function findNextNode(
 
 function countPaths(
   node: BeamNode | null,
-  memo = new Map<BeamNode, number>(),
+  memo = new Map<BeamNode, number>()
 ): number {
   if (node === null) {
     return 0
@@ -84,7 +85,7 @@ function countPaths(
   return totalPaths
 }
 
-export function answer() {
+export function answer(): number {
   grid = getGrid(data)
 
   let total = 0

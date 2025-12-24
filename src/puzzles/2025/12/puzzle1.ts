@@ -3,7 +3,7 @@ import { getLines, printLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
 
 import data from './sample.txt?raw'
-export { default } from './puzzle1.ts?raw'
+export { default } from './puzzle1?raw'
 
 // let lines: string[]
 // export let grid: Grid

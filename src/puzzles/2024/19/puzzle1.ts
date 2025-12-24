@@ -1,4 +1,5 @@
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
@@ -45,7 +46,7 @@ function canMakeTowel2(towelToMake: string, patterns: string[]): boolean {
   return dp[towelToMake.length]
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
 
   try {

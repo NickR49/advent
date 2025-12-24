@@ -23,7 +23,7 @@ function blink(inputNumbers: number[]): number[] {
   return outputNumbers
 }
 
-export function answer() {
+export function answer(): number {
   // let line = '125 17'
   let line = '8069 87014 98 809367 525 0 9494914 5'
   let numbers = line.split(' ').map(Number)

@@ -1,4 +1,5 @@
 import { cloneDeep } from 'lodash'
+
 import {
   addUniqueCoord,
   Coord,
@@ -11,6 +12,7 @@ import {
 } from '~/utils/gridUtils'
 import { getLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
 export { default } from './puzzle2.ts?raw'
 
@@ -148,7 +150,7 @@ function moveRobotVertically(currentCoord: Coord, move: string): Coord {
   return destCoord
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
 
   try {

@@ -1,0 +1,14 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "singleQuote": true,
+  "trailingComma": "es5",
+  "semi": false,
+  "jsxSingleQuote": true,
+  "printWidth": 80,
+  "experimentalSortImports": {
+      "order": "asc",
+      "sortSideEffects": false,
+      "ignoreCase": true,
+  }
+  // "plugins": ["prettier-plugin-tailwindcss"]
+}

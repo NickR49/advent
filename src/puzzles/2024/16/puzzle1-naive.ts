@@ -12,6 +12,7 @@ import {
   setGridCell,
 } from '~/utils/gridUtils'
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
@@ -86,7 +87,7 @@ function move(directionIndex: number, [x, y]: Coord): Coord {
 }
 
 // This basically works for the samples but is horrendously slow for the real data
-export function answer() {
+export function answer(): number {
   let total = 100000000000
   let stuckCount = 0
 

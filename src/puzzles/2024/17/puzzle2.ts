@@ -1,4 +1,5 @@
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
 export { default } from './puzzle2.ts?raw'
 
@@ -11,7 +12,7 @@ function getComboOperandValue(
   operand: number,
   a: number,
   b: number,
-  c: number,
+  c: number
 ): number {
   if (operand >= 0 && operand <= 3) {
     return operand
@@ -91,7 +92,7 @@ function getOutput(a: number, b: number, c: number): string {
   return result.map((num) => `${num}`).join(',')
 }
 const million = 1000000
-export function answer() {
+export function answer(): number {
   let result = 0
   try {
     // let a = 1100 * million

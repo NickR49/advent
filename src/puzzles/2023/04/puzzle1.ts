@@ -23,7 +23,7 @@ function getCardPoints(card: string): number {
   return points
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
   data.split('\n').forEach((line) => {
     total += getCardPoints(line)

@@ -69,7 +69,7 @@ function calcChecksum(input: Entry[]): number {
   return total
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
 
   try {

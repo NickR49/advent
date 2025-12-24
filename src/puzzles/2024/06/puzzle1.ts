@@ -5,6 +5,7 @@ import {
   getGridCell,
   setGridCell,
 } from '~/utils/gridUtils'
+
 import data from './input.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
@@ -30,7 +31,7 @@ function findGuardLocation(): Coord | undefined {
 
 function moveGuard(
   guardLoc: Coord,
-  direction: Direction,
+  direction: Direction
 ): [Coord | undefined, Direction] {
   const [guardX, guardY] = guardLoc
   // Check if there is an obstacle
@@ -55,7 +56,7 @@ function moveGuard(
   }
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
 
   try {

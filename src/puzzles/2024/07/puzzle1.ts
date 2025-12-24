@@ -1,4 +1,5 @@
 import { getLines } from '~/utils/lineUtils'
+
 import data from './input.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
@@ -36,7 +37,7 @@ function isValidLine(total: number, values: number[]): boolean {
   return false
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
 
   try {

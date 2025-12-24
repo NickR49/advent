@@ -2,6 +2,7 @@ import { createGraphFromMaze, dijkstra } from '~/utils/dijkstra'
 import { Grid, setGridCell } from '~/utils/gridUtils'
 import { getLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
@@ -19,7 +20,7 @@ export const grid: Grid = { cells, height: dimensions, width: dimensions }
 setGridCell(grid, [0, 0], 'S')
 setGridCell(grid, [dimensions - 1, dimensions - 1], 'E')
 
-export function answer() {
+export function answer(): number {
   let total = 0
 
   try {

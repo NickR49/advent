@@ -52,7 +52,7 @@ const numberRegex = /[0-9]+/
 
 function findAdjacentNumbers(
   allLines: string[],
-  aster: SchematicAster,
+  aster: SchematicAster
 ): SchematicAster {
   // Check the line above
   if (aster.y > 0) {
@@ -85,7 +85,7 @@ function findAdjacentNumbers(
   return aster
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
   const asters: SchematicAster[] = []
 

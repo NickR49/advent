@@ -1,5 +1,7 @@
 import { isEqual } from 'lodash'
+
 import { getLines } from '~/utils/lineUtils'
+
 import data from './input.txt?raw'
 export { default } from './puzzle2.ts?raw'
 
@@ -53,10 +55,10 @@ function isSafeReport(report: string): boolean {
   return false
 }
 
-export function answer() {
+export function answer(): number {
   const reports = extractReports(data)
   const safeReportCount = reports.filter((report) =>
-    isSafeReport(report),
+    isSafeReport(report)
   ).length
 
   return safeReportCount

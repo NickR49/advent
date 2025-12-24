@@ -1,5 +1,6 @@
 import { getLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
@@ -7,7 +8,7 @@ let lines: string[]
 
 type TupleArray = [number, number][]
 
-export function answer() {
+export function answer(): number {
   lines = getLines(data)
 
   const blankLineIndex = lines.findIndex((line) => line.trim() === '')

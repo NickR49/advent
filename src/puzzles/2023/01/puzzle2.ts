@@ -29,14 +29,14 @@ function convertWordToNumber(word: string): number {
   return index
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
   data.split('\n').forEach((line) => {
     if (line.trim().length > 0) {
       const matches = line.match(regex) ?? ['0']
       const firstMatch = (line.match(regex) ?? ['0'])[0]
       const lastMatch = reverseString(
-        (reverseString(line).match(backwardsRegex) ?? ['0'])[0],
+        (reverseString(line).match(backwardsRegex) ?? ['0'])[0]
       )
       const firstNum = convertWordToNumber(firstMatch)
       const lastNum = convertWordToNumber(lastMatch)

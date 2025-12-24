@@ -1,4 +1,5 @@
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
@@ -28,7 +29,7 @@ function getComboOperandValue(operand: number): number {
   return 7
 }
 
-export function answer() {
+export function answer(): string {
   const result: number[] = []
 
   try {

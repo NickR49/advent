@@ -1,5 +1,6 @@
 import { getLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
@@ -30,7 +31,7 @@ function getInvalidIds(start: number, end: number): number[] {
   return invalidIds
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
   const line = lines[0]
   const ranges = line.split(',')

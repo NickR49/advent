@@ -7,6 +7,7 @@ import {
   uniqueCoords,
 } from '~/utils/gridUtils'
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
@@ -35,7 +36,7 @@ function findNines([x, y]: Coord, height: number): Coord[] {
   return nines
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
 
   try {

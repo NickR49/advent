@@ -1,6 +1,7 @@
 import { Coord3D, Edge } from '~/utils/3dUtils'
 import { getLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
+
 import data from './input.txt?raw'
 export { default } from './puzzle1.ts?raw'
 
@@ -18,14 +19,14 @@ interface Circuit {
 
 function getDist(a: Coord3D, b: Coord3D): number {
   return Math.sqrt(
-    Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2) + Math.pow(a.z - b.z, 2),
+    Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2) + Math.pow(a.z - b.z, 2)
   )
 }
 
 function mergeCircuits(
   circuits: Circuit[],
   nodeA: Coord3D,
-  nodeB: Coord3D,
+  nodeB: Coord3D
 ): boolean {
   let circuitA: Circuit | null = null
   let circuitB: Circuit | null = null
@@ -56,7 +57,7 @@ function mergeCircuits(
   }
 }
 
-export function answer() {
+export function answer(): number {
   lines = getLines(data)
   let total = 0
   let connections = 0

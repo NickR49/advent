@@ -1,14 +1,14 @@
+import { Coord } from '~/utils/gridUtils'
 import { getLines } from '~/utils/lineUtils'
+import { log } from '~/utils/log'
 import { isRectangleInsidePolygon } from '~/utils/polygonUtils'
 
-import { Coord } from '~/utils/gridUtils'
-import { log } from '~/utils/log'
 import data from './input.txt?raw'
-export { default } from './puzzle2.ts?raw'
+export { default } from './puzzle2?raw'
 
 let lines: string[]
 
-export function answer() {
+export function answer(): number {
   lines = getLines(data)
 
   let total = 0
@@ -16,7 +16,7 @@ export function answer() {
   try {
     // Populate red tiles in grid as well as intermediate green tiles
     const vertices: Coord[] = lines.map(
-      (line) => line.split(',').map(Number) as Coord,
+      (line) => line.split(',').map(Number) as Coord
     )
 
     // The rectangle must have RED tiles (polygon vertices) in OPPOSITE corners

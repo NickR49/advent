@@ -1,6 +1,7 @@
 import { Coord, isEqualCoord } from '~/utils/gridUtils'
 import { getLines } from '~/utils/lineUtils'
 import { log } from '~/utils/log'
+
 import data from './sample2.txt?raw'
 export { default } from './puzzle2.ts?raw'
 
@@ -19,7 +20,7 @@ const buttonBTokens = 1
 function playMachine(
   [ax, ay]: Coord,
   [bx, by]: Coord,
-  [px, py]: Coord,
+  [px, py]: Coord
 ): number {
   // Brute force - iterate through all combinations to find cheapest sequence of moves
   for (let i = 10000000000000; i > 0; i--) {
@@ -36,7 +37,7 @@ function playMachine(
   return 0
 }
 
-export function answer() {
+export function answer(): number {
   let total = 0
 
   try {
